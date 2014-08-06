@@ -1,13 +1,30 @@
-﻿{
+{
     "name": "Password Length Inspector",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "manifest_version": 2,
-	"icons": { "128": "extension-icon.png" },
-	"content_scripts": [
-    {
-        "matches": ["<all_urls>"],
-		"all_frames": true,
-		"css": ["inspector.css"],
-        "js": ["jquery.js", "jquery-ui.min.js", "inspector.js"]
-    }]
+    "minimum_chrome_version": "27",
+    "author": "koddistortion",
+    "icons": {
+        "512": "img/512-ext-icon.png",
+        "256": "img/256-ext-icon.png",
+        "128": "img/128-ext-icon.png",
+        "64": "img/64-ext-icon.png",
+        "48": "img/48-ext-icon.png",
+        "32": "img/32-ext-icon.png",
+        "16": "img/16-ext-icon.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "all_frames": true,
+            "css": [
+                "css/inspector.css"
+            ],
+            "js": [
+                "libs/jquery.js",
+                "libs/jquery-ui.min.js",
+                "libs/arrive-2.0.0.min.js",
+                "inspector.js"]
+        }
+    ]
 }
