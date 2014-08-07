@@ -28,16 +28,42 @@ Object.defineProperty(Selectors, "wasDragged", {
     writable: false
 });
 
-var PasswordLengthIndicator = function () {
+var options = {
+    'placement': 'outside',
+    'position': 'right',
+    'dynamic': true
+};
+
+var PasswordLengthIndicator = function() {
     this.isActive = false;
     this.attachedFields = {};
     this.uniqueNumber = 0;
     this.observedIcons = [];
+    this.options = this.loadOptions();
 };
 
-PasswordLengthIndicator.prototype.setIconPosition = function ($indicator, $field) {
-    if($indicator.data(Selectors.wasDragged)) {
-      return;
+PasswordLengthIndicator.prototype.storeOptions = function($options) {
+    if ($options === undefined) {
+        $options = options;
+    }
+    chrome.storage.sync.set($options, function() {
+        console.log('options persisted');
+    });
+};
+
+PasswordLengthIndicator.prototype.loadOptions = function() {
+    var $options = chrome.storage.sync.get('options', function() {
+        console.log('options retrieved');
+    });
+    if ($options === undefined) {
+        this.storeOptions();
+    }
+    return $options;
+};
+
+PasswordLengthIndicator.prototype.setIconPosition = function($indicator, $field) {
+    if ($indicator.data(Selectors.wasDragged)) {
+        return;
     }
     var $newTop = $field.offset().top + ($indicator.data(Selectors.offset));
     var $newLeft = $field.offset().left + $field.outerWidth() + ($indicator.data(Selectors.size) / 4);
@@ -45,7 +71,7 @@ PasswordLengthIndicator.prototype.setIconPosition = function ($indicator, $field
     $indicator.css("left", $newLeft);
 };
 
-PasswordLengthIndicator.prototype.attachIcon = function ($field) {
+PasswordLengthIndicator.prototype.attachIcon = function($field) {
     if ($field.data(Selectors.hasIndicator)) {
         return;
     }
@@ -57,28 +83,28 @@ PasswordLengthIndicator.prototype.attachIcon = function ($field) {
     var $offset = 0;
     var $zIndex = this.getZLevel($field);
     var $indicator = $("<div></div>")
-        .addClass("pw-inspector-length")
-        .addClass($className)
-        .html($text)
-        .css("zIndex", $zIndex)
-        .data(Selectors.size, $size)
-        .data(Selectors.referencedFieldId, $field.data(Selectors.passwordFieldId))
-        .data(Selectors.offset, $offset);
+            .addClass("pw-inspector-length")
+            .addClass($className)
+            .html($text)
+            .css("zIndex", $zIndex)
+            .data(Selectors.size, $size)
+            .data(Selectors.referencedFieldId, $field.data(Selectors.passwordFieldId))
+            .data(Selectors.offset, $offset);
     $('body').append($indicator);
     $indicator.draggable({
         cursorAt: {
             top: 10,
             left: 10
-        }, 
+        },
         start: function() {
-          $(this).data(Selectors.wasDragged, true);
+            $(this).data(Selectors.wasDragged, true);
         }
     });
     this.observedIcons.push($indicator);
     this.setIconPosition($indicator, $field);
 };
 
-PasswordLengthIndicator.prototype.getZLevel = function ($zIndexField) {
+PasswordLengthIndicator.prototype.getZLevel = function($zIndexField) {
     var z;
     var $zIndex = 0;
     var c = 0;
@@ -100,7 +126,7 @@ PasswordLengthIndicator.prototype.getZLevel = function ($zIndexField) {
     return $zIndex;
 };
 
-PasswordLengthIndicator.prototype.setUniqueId = function ($field) {
+PasswordLengthIndicator.prototype.setUniqueId = function($field) {
     if ($field && !$field.data(Selectors.passwordFieldId)) {
         var $fieldId = $field.attr("id");
         if ($fieldId) {
@@ -115,25 +141,25 @@ PasswordLengthIndicator.prototype.setUniqueId = function ($field) {
     }
 };
 
-PasswordLengthIndicator.prototype.prepareId = function (id) {
+PasswordLengthIndicator.prototype.prepareId = function(id) {
     id = id.replace(":", "\\:")
-        .replace("#", "\\#")
-        .replace(".", "\\.")
-        .replace(",", "\\,")
-        .replace("[", "\\[")
-        .replace("]", "\\]")
-        .replace("(", "\\(")
-        .replace(")", "\\)")
-        .replace("'", "\\'")
-        .replace(" ", "\\ ")
-        .replace("\"", "\\\"");
+            .replace("#", "\\#")
+            .replace(".", "\\.")
+            .replace(",", "\\,")
+            .replace("[", "\\[")
+            .replace("]", "\\]")
+            .replace("(", "\\(")
+            .replace(")", "\\)")
+            .replace("'", "\\'")
+            .replace(" ", "\\ ")
+            .replace("\"", "\\\"");
     return id;
 };
 
-PasswordLengthIndicator.prototype.preparePasswordFields = function () {
+PasswordLengthIndicator.prototype.preparePasswordFields = function() {
     var $fields = [];
     var $self = this;
-    $(Selectors.passwordInputType).each(function () {
+    $(Selectors.passwordInputType).each(function() {
         var $field = $self.preparePasswordField($(this));
         if ($field) {
             $fields.push($field);
@@ -142,7 +168,7 @@ PasswordLengthIndicator.prototype.preparePasswordFields = function () {
     return $fields;
 };
 
-PasswordLengthIndicator.prototype.preparePasswordField = function ($field) {
+PasswordLengthIndicator.prototype.preparePasswordField = function($field) {
     if ($field.is(":visible") && $field.css("visibility") !== "hidden" && $field.css("visibility") !== "collapsed") {
         if ($.inArray($field, this.observedIcons)) {
             this.setUniqueId($field);
@@ -153,13 +179,13 @@ PasswordLengthIndicator.prototype.preparePasswordField = function ($field) {
     return undefined;
 };
 
-PasswordLengthIndicator.prototype.checkObservedElements = function () {
+PasswordLengthIndicator.prototype.checkObservedElements = function() {
     if (this.observingLock) {
         return;
     }
     this.observingLock = true;
     var $self = this;
-    $.each(this.observedIcons, function ($index, $iconField) {
+    $.each(this.observedIcons, function($index, $iconField) {
         if ($iconField && $iconField.length === 1) {
             var $fieldId = $iconField.data(Selectors.referencedFieldId);
             var $selector = "input[data-" + Selectors.passwordFieldId + "='" + $fieldId + "']:first";
@@ -181,8 +207,8 @@ PasswordLengthIndicator.prototype.checkObservedElements = function () {
     this.observingLock = false;
 };
 
-PasswordLengthIndicator.prototype.waitForNewPasswordFields = function () {
-    if(this.waitingLock) {
+PasswordLengthIndicator.prototype.waitForNewPasswordFields = function() {
+    if (this.waitingLock) {
         return;
     }
     this.waitingLock = true;
@@ -195,8 +221,8 @@ PasswordLengthIndicator.prototype.waitForNewPasswordFields = function () {
 var pwIndicator = new PasswordLengthIndicator();
 pwIndicator.preparePasswordFields();
 pwIndicator.waitForNewPasswordFields();
-$(function () {
-    setInterval(function () {
+$(function() {
+    setInterval(function() {
         pwIndicator.checkObservedElements();
     }, 400);
 });
