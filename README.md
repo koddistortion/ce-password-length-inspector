@@ -13,13 +13,13 @@ Libraries used
 Changelog
 ---------
 
-### v1.1.0
-* Indicators ``Z-Index`` is now properly calculated based on password fields ``Z-Index``
-* Indicators are now attached and bound to password fields properties (visibility & position)
-* Dynamically added password fields are now attached with indicators
+### v1.1.0 [2014/08/07]
+* **New** - Dynamically added password fields are now attached with indicators
+* **Improvement** - Indicators are now attached and bound to password fields properties (visibility & position)
+* **Bug Fix** - Indicators ``Z-Index`` is now properly calculated based on password fields ``Z-Index``
 
-### v1.0.0
-* First publicly available version
+### v1.0.0 [2014/08/01]
+* **New** - First publicly available version
 
   [1]: http://keepass.info
   [2]: https://agilebits.com/onepassword
