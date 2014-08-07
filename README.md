@@ -12,6 +12,8 @@ Changelog
 * Indicators are now attached and bound to password fields properties (visibility & position)
 * Dynamically added password fields are now attached with indicators
 
+### v1.0.0
+* First publicly available version
 
   [1]: http://keepass.info
   [2]: https://agilebits.com/onepassword
