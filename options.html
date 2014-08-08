@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Password Length Indicator Options</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <script src="libs/jquery.js"></script>
+        <script src="libs/bootstrap-3.2.0.min.js"></script>
+        <script src="options.js"></script>
+        <script src="initOptions.js"></script>
+    </head>
+    <body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <h1><img src="img/48-ext-icon.png" alt="" /> Password Length Indicator Options</h1>
+            </div>
+        </div>
+        <hr />
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="placement" class="col-sm-3 control-label">Indicator Placement</label>
+                        <div class="col-sm-4">
+                            <select name="placement" id="placement" class="form-control">
+                                <option value="inside">Inside of password field</option>
+                                <option value="outside">Outside of password field</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="position" class="col-sm-3 control-label">Indicator Position</label>
+                        <div class="col-sm-4">
+                             <select name="placement" id="position" class="form-control">
+                                <option value="left">Left side</option>
+                                <option value="right">Right side</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="dynamic"> Attach indicator to dynamically added fields
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="button" id="save" class="btn btn-default">Save</button>
+                        </div>
+                    </div>
+                </form>                
+            </div>
+        </div>
+    </body>
+</html>

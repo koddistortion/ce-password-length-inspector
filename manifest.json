@@ -1,12 +1,18 @@
 {
     "name": "Password Length Inspector",
     "short_name": "PWL Inspector",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "manifest_version": 2,
     "minimum_chrome_version": "27",
     "author": "koddistortion",
     "permissions": [
         "storage"
+    ],
+    "options_page": "options.html",
+    "web_accessible_resources": [
+        "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css",
+        "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css",
+        "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
     ],
     "icons": {
         "512": "img/512-ext-icon.png",
@@ -28,6 +34,7 @@
                 "libs/jquery.js",
                 "libs/jquery-ui.min.js",
                 "libs/arrive-2.0.0.min.js",
+                "options.js",
                 "inspector.js"]
         }
     ]

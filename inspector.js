@@ -20,37 +20,12 @@ Object.defineProperty(Selectors, "wasDragged", {
     writable: false
 });
 
-var Placement = {};
-Object.defineProperty(Placement, "inside", {
-    value: "inside",
-    writable: false
-});
-Object.defineProperty(Placement, "outside", {
-    value: "outside",
-    writable: false
-});
-
-var Position = {};
-Object.defineProperty(Position, "left", {
-    value: "left",
-    writable: false
-});
-Object.defineProperty(Position, "right", {
-    value: "right",
-    writable: false
-});
-
-var Options = function() {
-    this.placement = Placement.outside;
-    this.position = Position.right;
-    this.dynamic = false;
-};
-
 var PasswordLengthIndicator = function() {
     this.isActive = false;
     this.attachedFields = {};
     this.uniqueNumber = 0;
     this.observedIcons = [];
+    this.options = new Options();
     this.loadOptions();
 };
 
@@ -66,8 +41,8 @@ PasswordLengthIndicator.prototype.storeOptions = function($options) {
 
 PasswordLengthIndicator.prototype.loadOptions = function() {
     var self = this;
-    chrome.storage.sync.get(this.options, function(object) {
-        self.options = object;
+    chrome.storage.sync.get('options', function(object) {
+        self.options = object.options;
         self.preparePasswordFields();
         self.startBindingInterval();
         self.waitForNewPasswordFields();
@@ -124,7 +99,7 @@ PasswordLengthIndicator.prototype.attachIcon = function($field) {
             .addClass($className)
             .html($text)
             .css("zIndex", $zIndex)
-            .data(Selectors.referencedFieldId, $field.data(Selectors.passwordFieldId))
+            .data(Selectors.referencedFieldId, $field.data(Selectors.passwordFieldId));
     $('body').append($indicator);
     $indicator.draggable({
         cursorAt: {
@@ -255,9 +230,4 @@ PasswordLengthIndicator.prototype.waitForNewPasswordFields = function() {
     }
 };
 
-var pwIndicator = new PasswordLengthIndicator();
-$(function() {
-    setInterval(function() {
-        pwIndicator.checkObservedElements();
-    }, 400);
-});
+new PasswordLengthIndicator();
