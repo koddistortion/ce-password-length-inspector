@@ -3,14 +3,6 @@ Object.defineProperty(Selectors, "hasIndicator", {
     value: "pwl-has-password-indicator",
     writable: false
 });
-Object.defineProperty(Selectors, "size", {
-    value: "pwl-size",
-    writable: false
-});
-Object.defineProperty(Selectors, "offset", {
-    value: "pwl-offset",
-    writable: false
-});
 Object.defineProperty(Selectors, "referencedFieldId", {
     value: "pwl-ref-id",
     writable: false
@@ -28,10 +20,30 @@ Object.defineProperty(Selectors, "wasDragged", {
     writable: false
 });
 
-var options = {
-    'placement': 'outside',
-    'position': 'right',
-    'dynamic': true
+var Placement = {};
+Object.defineProperty(Placement, "inside", {
+    value: "inside",
+    writable: false
+});
+Object.defineProperty(Placement, "outside", {
+    value: "outside",
+    writable: false
+});
+
+var Position = {};
+Object.defineProperty(Position, "left", {
+    value: "left",
+    writable: false
+});
+Object.defineProperty(Position, "right", {
+    value: "right",
+    writable: false
+});
+
+var Options = function() {
+    this.placement = Placement.outside;
+    this.position = Position.right;
+    this.dynamic = false;
 };
 
 var PasswordLengthIndicator = function() {
@@ -39,37 +51,64 @@ var PasswordLengthIndicator = function() {
     this.attachedFields = {};
     this.uniqueNumber = 0;
     this.observedIcons = [];
-    this.options = this.loadOptions();
+    this.loadOptions();
 };
 
 PasswordLengthIndicator.prototype.storeOptions = function($options) {
     if ($options === undefined) {
-        $options = options;
+        this.options = new Options();
+    } else {
+        this.options = $options;
     }
-    chrome.storage.sync.set($options, function() {
-        console.log('options persisted');
+    chrome.storage.sync.set(this.options, function() {
     });
 };
 
 PasswordLengthIndicator.prototype.loadOptions = function() {
-    var $options = chrome.storage.sync.get('options', function() {
-        console.log('options retrieved');
+    var self = this;
+    chrome.storage.sync.get(this.options, function(object) {
+        self.options = object;
+        self.preparePasswordFields();
+        self.startBindingInterval();
+        self.waitForNewPasswordFields();
     });
-    if ($options === undefined) {
-        this.storeOptions();
-    }
-    return $options;
+};
+
+PasswordLengthIndicator.prototype.startBindingInterval = function() {
+    var self = this;
+    setInterval(function() {
+        self.checkObservedElements();
+    }, 400);
 };
 
 PasswordLengthIndicator.prototype.setIconPosition = function($indicator, $field) {
     if ($indicator.data(Selectors.wasDragged)) {
         return;
     }
-    var $newTop = $field.offset().top + ($indicator.data(Selectors.offset));
-    var $newLeft = $field.offset().left + $field.outerWidth() + ($indicator.data(Selectors.size) / 4);
+    var $indicatorWidth = $indicator.outerWidth();
+    var $indicatorHeight = $indicator.outerHeight();
+    var $verticalOffset = ($field.outerHeight() - $indicatorHeight) / 2;
+    var $horizontalOffset = 3;
+    
+    var $newTop, $newLeft;
+    if(this.options.position === Position.right) {
+        if(this.options.placement === Placement.inside) {
+            $newLeft = $field.offset().left + $field.outerWidth() - $indicatorWidth - $horizontalOffset;
+        } else {
+            $newLeft = $field.offset().left + $field.outerWidth() + $horizontalOffset;
+        }
+    } else {
+        if(this.options.placement === Placement.inside) {
+            $newLeft = $field.offset().left + $horizontalOffset;
+        } else {
+            $newLeft = $field.offset().left - $indicatorWidth - $horizontalOffset;
+        }
+    }
+    $newTop = $field.offset().top + $verticalOffset;
     $indicator.css("top", $newTop);
     $indicator.css("left", $newLeft);
 };
+
 
 PasswordLengthIndicator.prototype.attachIcon = function($field) {
     if ($field.data(Selectors.hasIndicator)) {
@@ -79,17 +118,13 @@ PasswordLengthIndicator.prototype.attachIcon = function($field) {
     var $maxLength = $field.attr("maxLength");
     var $text = $maxLength ? $maxLength : "&infin;";
     var $className = $maxLength ? "" : "large-font";
-    var $size = 20;
-    var $offset = 0;
     var $zIndex = this.getZLevel($field);
     var $indicator = $("<div></div>")
             .addClass("pw-inspector-length")
             .addClass($className)
             .html($text)
             .css("zIndex", $zIndex)
-            .data(Selectors.size, $size)
             .data(Selectors.referencedFieldId, $field.data(Selectors.passwordFieldId))
-            .data(Selectors.offset, $offset);
     $('body').append($indicator);
     $indicator.draggable({
         cursorAt: {
@@ -158,9 +193,9 @@ PasswordLengthIndicator.prototype.prepareId = function(id) {
 
 PasswordLengthIndicator.prototype.preparePasswordFields = function() {
     var $fields = [];
-    var $self = this;
+    var self = this;
     $(Selectors.passwordInputType).each(function() {
-        var $field = $self.preparePasswordField($(this));
+        var $field = self.preparePasswordField($(this));
         if ($field) {
             $fields.push($field);
         }
@@ -184,7 +219,7 @@ PasswordLengthIndicator.prototype.checkObservedElements = function() {
         return;
     }
     this.observingLock = true;
-    var $self = this;
+    var self = this;
     $.each(this.observedIcons, function($index, $iconField) {
         if ($iconField && $iconField.length === 1) {
             var $fieldId = $iconField.data(Selectors.referencedFieldId);
@@ -192,16 +227,16 @@ PasswordLengthIndicator.prototype.checkObservedElements = function() {
             var $field = $($selector);
             if (!$field || $field.length !== 1) {
                 $iconField.remove();
-                $self.observedIcons.splice($index, 1);
+                self.observedIcons.splice($index, 1);
             } else if (!$field.is(":visible")) {
                 $iconField.hide();
             } else if ($field.is(":visible")) {
                 $iconField.show();
-                $self.setIconPosition($iconField, $field);
+                self.setIconPosition($iconField, $field);
                 $field.data(Selectors.hasIndicator, true);
             }
         } else {
-            $self.observedIcons.splice($index, 1);
+            self.observedIcons.splice($index, 1);
         }
     });
     this.observingLock = false;
@@ -211,16 +246,16 @@ PasswordLengthIndicator.prototype.waitForNewPasswordFields = function() {
     if (this.waitingLock) {
         return;
     }
-    this.waitingLock = true;
-    var $self = this;
-    $(document).arrive(Selectors.passwordInputType, function() {
-        $self.preparePasswordField($(this));
-    });
+    if (this.options.dynamic) {
+        this.waitingLock = true;
+        var self = this;
+        $(document).arrive(Selectors.passwordInputType, function() {
+            self.preparePasswordField($(this));
+        });
+    }
 };
 
 var pwIndicator = new PasswordLengthIndicator();
-pwIndicator.preparePasswordFields();
-pwIndicator.waitForNewPasswordFields();
 $(function() {
     setInterval(function() {
         pwIndicator.checkObservedElements();
