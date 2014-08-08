@@ -10,12 +10,12 @@
         <title>JS Bin</title>
     </head>
     <body>
-        <div style="width: 80%; margin-left: auto; margin-right: auto;" >
+        <div style="width: 80%; margin-left: auto; margin-right: auto;" id="test-div">
             <input type="password" id="pwd" maxlength="" style="width: 50%; height: 20px;" />
             <br />
             <button id="hide" onclick="$('#pwd').toggle();">Toggle Password Field</button>
             <br />
-            <button id="newField" onclick="$('body').append('<br /><input type=\'password\' style=\'width:80%\' />');">Add New Password Field</button>
+            <button id="newField" onclick="$('#test-div').append('<br /><input type=\'password\' style=\'width:80%\' />');">Add New Password Field</button>
         </div>
     </body>
 </html>
