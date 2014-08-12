@@ -25,7 +25,6 @@ var PasswordLengthIndicator = function() {
     this.attachedFields = {};
     this.uniqueNumber = 0;
     this.observedIcons = [];
-    this.options = new Options();
     this.loadOptions();
 };
 
@@ -41,8 +40,12 @@ PasswordLengthIndicator.prototype.storeOptions = function($options) {
 
 PasswordLengthIndicator.prototype.loadOptions = function() {
     var self = this;
-    chrome.storage.sync.get('options', function(object) {
-        self.options = object.options;
+    chrome.storage.sync.get(this.options, function($options) {
+        if($options !== undefined) {
+            self.options = $options;
+        } else {
+            self.options = new Options();
+        }
         self.preparePasswordFields();
         self.startBindingInterval();
         self.waitForNewPasswordFields();

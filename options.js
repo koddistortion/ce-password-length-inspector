@@ -25,13 +25,12 @@ var Options = function() {
 };
 
 var getOptions = function() {
-    chrome.storage.sync.get('options', function(element) {
-        fillForm(element.options);
+    chrome.storage.sync.get(null, function($options) {
+        fillForm($options);
     });
 };
 
 var fillForm = function(options) {
-    console.trace(options);
     var pos = options.position !== undefined ? options.position : Position.right;
     var pla = options.placement !== undefined ? options.placement : Placement.outside;
     var chk = options.dynamic || options.dynamic === undefined ? 'checked' : '';
@@ -46,4 +45,9 @@ var retrieveForm = function() {
         position: $('#position').val(),
         dynamic: $('#dynamic').is(':checked')
     };
+};
+
+var resetForm = function() {
+    fillForm(new Options());
+    chrome.storage.sync.clear();
 };
