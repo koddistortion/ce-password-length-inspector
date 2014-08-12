@@ -1,9 +1,9 @@
 {
     "extension_Name": {
-        "message": "Passwortlängen Indikator"
+        "message": "Passwortl\u00e4ngen Indikator"
     },
     "title": {
-        "message": "Passwortlängen Indikator Optionen"
+        "message": "Passwortl\u00e4ngen Indikator Optionen"
     },
     "lbl_placement": {
         "message": "Indikator Platzierung"
@@ -12,7 +12,7 @@
         "message": "Innerhalb des Passwordfelds"
     },
     "lbl_placement_outside": {
-        "message": "Außerhalb des Passwordfelds"
+        "message": "Au\u00dferhalb des Passwordfelds"
     },
     "lbl_position": {
         "message": "Indikator Position"
@@ -24,7 +24,7 @@
         "message": "Rechte Seite"
     },
     "lbl_dynamic": {
-        "message": "Indikator zu dynamisch erstellten Feldern hinzufügen"
+        "message": "Indikator zu dynamisch erstellten Feldern hinzuf\u00fcgen"
     },
     "lbl_dragging": {
         "message": "Verschieben des Indikators erlauben"
@@ -33,6 +33,6 @@
         "message": "Optionen Speichern"
     },
     "reset": {
-        "message": "Optionen Zurücksetzen"
+        "message": "Optionen Zur\u00fccksetzen"
     }
 }

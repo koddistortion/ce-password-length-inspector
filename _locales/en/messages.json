@@ -1,38 +1,50 @@
 {
     "extension_Name": {
-        "message": "Password Length Inspector"
+        "message": "Password Length Inspector",
+        "description": "Title of the website showing the options"
     },
     "title": {
-        "message": "Password Length Inspector Options"
+        "message": "Password Length Inspector Options",
+        "description": "Headline above the form that allows specifying the options"
     },
     "lbl_placement": {
-        "message": "Indicator Placement"
+        "message": "Indicator Placement",
+        "description": "Label for a select box, showing options for placing the indicator either inside or outside the password field"
     },
     "lbl_placement_inside": {
-        "message": "Inside of the password field"
+        "message": "Inside of the password field",
+        "description": "Label for the option of placing the indicator inside the password field"
     },
     "lbl_placement_outside": {
-        "message": "Outside of the password field"
+        "message": "Outside of the password field",
+        "description": "Label for the option of placing the indicator outside the password field"
     },
     "lbl_position": {
-        "message": "Indicator Position"
+        "message": "Indicator Position",
+        "description": "Label for a select box, showing options for positioning the indicator either on the left or right side"
     },
     "lbl_position_left": {
-        "message": "Left side"
+        "message": "Left side",
+        "description": "Label for the option of positioning the indicator left to the password field"
     },
     "lbl_position_right": {
-        "message": "Right side"
+        "message": "Right side",
+        "description": "Label for the option of positioning the indicator right to the password field"
     },
     "lbl_dynamic": {
-        "message": "Attach indicator to dynamically added fields"
+        "message": "Attach indicator to dynamically added fields",
+        "description": "Label for the checkbox toggling the observation of dynamically added password fields for attaching an indicator to them"
     },
     "lbl_dragging": {
-        "message": "Enable dragging of indicator"
+        "message": "Enable dragging of indicator",
+        "description": "Label for the checkbox toggling the possibility to drag the indicator with the mouse"
     },
     "save": {
-        "message": "Save Options"
+        "message": "Save Options",
+        "description": "Label for the button that causes the options to be saved"
     },
     "reset": {
-        "message": "Reset Options"
+        "message": "Reset Options",
+        "description": "Label for the button that causes the options to be reset and to clear the storage"
     }
 }
