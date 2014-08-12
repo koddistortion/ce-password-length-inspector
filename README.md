@@ -13,6 +13,11 @@ Libraries used
 Changelog
 ---------
 
+### v1.2.0 [2014/08/12]
+* **New** - Options page added that allows configuration of the extension
+* **New** - Indicator can now be positioned left or right of the password field and inside or outside of it (addressing #3)
+* **New** - Observation of dynamically added password fields can now enabled or disabled (addressing #6)
+
 ### v1.1.0 [2014/08/07]
 * **New** - Dynamically added password fields are now attached with indicators
 * **Improvement** - Indicators are now attached and bound to password fields properties (visibility & position)
