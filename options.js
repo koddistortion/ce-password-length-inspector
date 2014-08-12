@@ -22,6 +22,7 @@ var Options = function() {
     placement = Placement.outside;
     position = Position.right;
     dynamic = true;
+    dragging = true;
 };
 
 var getOptions = function() {
@@ -33,17 +34,20 @@ var getOptions = function() {
 var fillForm = function(options) {
     var pos = options.position !== undefined ? options.position : Position.right;
     var pla = options.placement !== undefined ? options.placement : Placement.outside;
-    var chk = options.dynamic || options.dynamic === undefined ? 'checked' : '';
+    var dyn = options.dynamic || options.dynamic === undefined ? 'checked' : '';
+    var drg = options.dragging || options.dragging === undefined ? 'checked' : '';
     $('#position').val(pos);
     $('#placement').val(pla);
-    $('#dynamic').prop('checked', chk);
+    $('#dynamic').prop('checked', dyn);
+    $('#dragging').prop('checked', drg);
 };
 
 var retrieveForm = function() {
     return {
         placement: $('#placement').val(),
         position: $('#position').val(),
-        dynamic: $('#dynamic').is(':checked')
+        dynamic: $('#dynamic').is(':checked'),
+        dragging: $('#dragging').is(':checked')
     };
 };
 

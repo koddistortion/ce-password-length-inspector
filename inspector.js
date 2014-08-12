@@ -21,21 +21,9 @@ Object.defineProperty(Selectors, "wasDragged", {
 });
 
 var PasswordLengthIndicator = function() {
-    this.isActive = false;
-    this.attachedFields = {};
     this.uniqueNumber = 0;
     this.observedIcons = [];
     this.loadOptions();
-};
-
-PasswordLengthIndicator.prototype.storeOptions = function($options) {
-    if ($options === undefined) {
-        this.options = new Options();
-    } else {
-        this.options = $options;
-    }
-    chrome.storage.sync.set(this.options, function() {
-    });
 };
 
 PasswordLengthIndicator.prototype.loadOptions = function() {
@@ -104,15 +92,17 @@ PasswordLengthIndicator.prototype.attachIcon = function($field) {
             .css("zIndex", $zIndex)
             .data(Selectors.referencedFieldId, $field.data(Selectors.passwordFieldId));
     $('body').append($indicator);
-    $indicator.draggable({
-        cursorAt: {
-            top: 10,
-            left: 10
-        },
-        start: function() {
-            $(this).data(Selectors.wasDragged, true);
-        }
-    });
+    if(this.options.dragging) {
+        $indicator.draggable({
+            cursorAt: {
+                top: 10,
+                left: 10
+            },
+            start: function () {
+                $(this).data(Selectors.wasDragged, true);
+            }
+        });
+    }
     this.observedIcons.push($indicator);
     this.setIconPosition($indicator, $field);
 };
