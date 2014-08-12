@@ -1,0 +1,38 @@
+{
+    "extension_Name": {
+        "message": "Password Length Inspector"
+    },
+    "title": {
+        "message": "Password Length Inspector Options"
+    },
+    "lbl_placement": {
+        "message": "Indicator Placement"
+    },
+    "lbl_placement_inside": {
+        "message": "Inside of the password field"
+    },
+    "lbl_placement_outside": {
+        "message": "Outside of the password field"
+    },
+    "lbl_position": {
+        "message": "Indicator Position"
+    },
+    "lbl_position_left": {
+        "message": "Left side"
+    },
+    "lbl_position_right": {
+        "message": "Right side"
+    },
+    "lbl_dynamic": {
+        "message": "Attach indicator to dynamically added fields"
+    },
+    "lbl_dragging": {
+        "message": "Enable dragging of indicator"
+    },
+    "save": {
+        "message": "Save Options"
+    },
+    "reset": {
+        "message": "Reset Options"
+    }
+}

@@ -52,6 +52,6 @@ var retrieveForm = function() {
 };
 
 var resetForm = function() {
-    fillForm(new Options());
     chrome.storage.sync.clear();
+    fillForm(new Options());
 };

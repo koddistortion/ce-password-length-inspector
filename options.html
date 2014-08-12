@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Password Length Inspector Options</title>
+        <title id="title"></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -14,7 +14,7 @@
     <body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
         <div class="container-fluid">
             <div class="col-md-12">
-                <h1><img src="img/48-ext-icon.png" alt="" /> Password Length Inspector Options</h1>
+                <h1><img src="img/48-ext-icon.png" alt="" /> <span id="headline"></span></h1>
             </div>
         </div>
         <hr />
@@ -22,20 +22,20 @@
             <div class="col-md-12">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label for="placement" class="col-sm-3 control-label">Indicator Placement</label>
+                        <label for="placement" class="col-sm-3 control-label" id="lbl_placement"></label>
                         <div class="col-sm-4">
                             <select name="placement" id="placement" class="form-control">
-                                <option value="inside">Inside of password field</option>
-                                <option value="outside">Outside of password field</option>
+                                <option value="inside" id="lbl_placement_inside"></option>
+                                <option value="outside" id="lbl_placement_outside"></option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="position" class="col-sm-3 control-label">Indicator Position</label>
+                        <label for="position" class="col-sm-3 control-label" id="lbl_position"></label>
                         <div class="col-sm-4">
                              <select name="placement" id="position" class="form-control">
-                                <option value="left">Left side</option>
-                                <option value="right">Right side</option>
+                                <option value="left" id="lbl_position_left"></option>
+                                <option value="right" id="lbl_position_right"></option>
                             </select>
                         </div>
                     </div>
@@ -43,14 +43,14 @@
                         <div class="col-sm-offset-3 col-sm-9">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" id="dynamic"> Attach indicator to dynamically added fields
+                                    <input type="checkbox" id="dynamic"> <span id="lbl_dynamic"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="col-sm-offset-3 col-sm-9">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" id="drag"> Enable dragging of indicator
+                                    <input type="checkbox" id="dragging"> <span id="lbl_dragging"></span>
                                 </label>
                             </div>
                         </div>
