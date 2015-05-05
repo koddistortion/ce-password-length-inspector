@@ -19,10 +19,11 @@ Object.defineProperty(Position, "right", {
 });
 
 var Options = function() {
-    placement = Placement.outside;
-    position = Position.right;
-    dynamic = true;
-    dragging = true;
+    this.placement = Placement.outside;
+    this.position = Position.right;
+    this.dynamic = true;
+    this.dragging = true;
+	this.overwrittenUrlMappings = {};
 };
 
 var getOptions = function() {
@@ -36,10 +37,12 @@ var fillForm = function(options) {
     var pla = options.placement !== undefined ? options.placement : Placement.outside;
     var dyn = options.dynamic || options.dynamic === undefined ? 'checked' : '';
     var drg = options.dragging || options.dragging === undefined ? 'checked' : '';
+	var map = options.overwrittenUrlMappings || {};
     $('#position').val(pos);
     $('#placement').val(pla);
     $('#dynamic').prop('checked', dyn);
     $('#dragging').prop('checked', drg);
+	$('#url_length_mapping').val(JSON.stringify(map, null, '\t'));
 };
 
 var retrieveForm = function() {
@@ -47,7 +50,8 @@ var retrieveForm = function() {
         placement: $('#placement').val(),
         position: $('#position').val(),
         dynamic: $('#dynamic').is(':checked'),
-        dragging: $('#dragging').is(':checked')
+        dragging: $('#dragging').is(':checked'),
+		overwrittenUrlMappings: JSON.parse($('#url_length_mapping').val())
     };
 };
 

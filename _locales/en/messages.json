@@ -39,6 +39,10 @@
         "message": "Enable dragging of indicator",
         "description": "Label for the checkbox toggling the possibility to drag the indicator with the mouse"
     },
+    "lbl_url_length_mapping": {
+        "message": "Override password lengths for URLs",
+        "description": "Label for the text area containing mappings for password length to URL (one per line)"
+    },
     "save": {
         "message": "Save Options",
         "description": "Label for the button that causes the options to be saved"

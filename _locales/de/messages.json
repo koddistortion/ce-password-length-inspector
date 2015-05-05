@@ -29,6 +29,9 @@
     "lbl_dragging": {
         "message": "Verschieben des Indikators erlauben"
     },
+    "lbl_url_length_mapping": {
+        "message": "Passwortlänge für URL überschreiben"
+    },
     "save": {
         "message": "Optionen Speichern"
     },
