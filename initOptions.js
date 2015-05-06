@@ -1,33 +1,27 @@
 $(document).ready(function () {
-	initializeMessages();
+	translateOptionsPage();
 	getOptions();
 	$('#save').click(function () {
-		chrome.storage.sync.set(retrieveForm(), function () {
-
-		});
+		chrome.storage.sync.set(serializeFormForStorage(), function () { });
 	});
 	$('#reset').click(function () {
-		resetForm();
+		chrome.storage.sync.clear();
+		resetOptionsForm();
+	});
+	$('#btn_override_add').click(function () {
+		addOverrideUrlRow();
 	});
 });
 
-var initializeMessages = function () {
-	$('#title').text(chrome.i18n.getMessage('title'));
-	$('#headline').text(chrome.i18n.getMessage('title'));
-
-	$('#lbl_placement').text(chrome.i18n.getMessage('lbl_placement'));
-	$('#lbl_placement_inside').text(chrome.i18n.getMessage('lbl_placement_inside'));
-	$('#lbl_placement_outside').text(chrome.i18n.getMessage('lbl_placement_outside'));
-
-	$('#lbl_position').text(chrome.i18n.getMessage('lbl_position'));
-	$('#lbl_position_left').text(chrome.i18n.getMessage('lbl_position_left'));
-	$('#lbl_position_right').text(chrome.i18n.getMessage('lbl_position_right'));
-
-	$('#lbl_dynamic').text(chrome.i18n.getMessage('lbl_dynamic'));
-	$('#lbl_dragging').text(chrome.i18n.getMessage('lbl_dragging'));
-
-	$('#lbl_url_length_mapping').text(chrome.i18n.getMessage('lbl_url_length_mapping'));
-
-	$('#save').text(chrome.i18n.getMessage('save'));
-	$('#reset').text(chrome.i18n.getMessage('reset'));
+var translateOptionsPage = function () {
+	$('[data-translate]').each(function() {
+		var $element = jQuery(this);
+		var translationId = $element.data('translate');
+		var translatedText = chrome.i18n.getMessage(translationId);
+		if(translatedText) {
+			$element.html(translatedText);
+		} else {
+			$element.text('!!!' + $element.text());
+		}
+	});
 };

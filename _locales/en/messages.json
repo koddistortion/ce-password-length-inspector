@@ -1,54 +1,82 @@
 {
-    "extension_Name": {
-        "message": "Password Length Inspector",
-        "description": "Title of the website showing the options"
-    },
-    "title": {
-        "message": "Password Length Inspector Options",
-        "description": "Headline above the form that allows specifying the options"
-    },
-    "lbl_placement": {
-        "message": "Indicator Placement",
-        "description": "Label for a select box, showing options for placing the indicator either inside or outside the password field"
-    },
-    "lbl_placement_inside": {
-        "message": "Inside of the password field",
-        "description": "Label for the option of placing the indicator inside the password field"
-    },
-    "lbl_placement_outside": {
-        "message": "Outside of the password field",
-        "description": "Label for the option of placing the indicator outside the password field"
-    },
-    "lbl_position": {
-        "message": "Indicator Position",
-        "description": "Label for a select box, showing options for positioning the indicator either on the left or right side"
-    },
-    "lbl_position_left": {
-        "message": "Left side",
-        "description": "Label for the option of positioning the indicator left to the password field"
-    },
-    "lbl_position_right": {
-        "message": "Right side",
-        "description": "Label for the option of positioning the indicator right to the password field"
-    },
-    "lbl_dynamic": {
-        "message": "Attach indicator to dynamically added fields",
-        "description": "Label for the checkbox toggling the observation of dynamically added password fields for attaching an indicator to them"
-    },
-    "lbl_dragging": {
-        "message": "Enable dragging of indicator",
-        "description": "Label for the checkbox toggling the possibility to drag the indicator with the mouse"
-    },
-    "lbl_url_length_mapping": {
-        "message": "Override password lengths for URLs",
-        "description": "Label for the text area containing mappings for password length to URL (one per line)"
-    },
-    "save": {
-        "message": "Save Options",
-        "description": "Label for the button that causes the options to be saved"
-    },
-    "reset": {
-        "message": "Reset Options",
-        "description": "Label for the button that causes the options to be reset and to clear the storage"
-    }
+  "extension_Name": {
+    "message": "Password Length Inspector",
+    "description": "Title of the website showing the options"
+  },
+  "title": {
+    "message": "Password Length Inspector Options",
+    "description": "Headline above the form that allows specifying the options"
+  },
+  "lbl_placement": {
+    "message": "Indicator Placement",
+    "description": "Label for a select box, showing options for placing the indicator either inside or outside the password field"
+  },
+  "lbl_placement_inside": {
+    "message": "Inside of the password field",
+    "description": "Label for the option of placing the indicator inside the password field"
+  },
+  "lbl_placement_outside": {
+    "message": "Outside of the password field",
+    "description": "Label for the option of placing the indicator outside the password field"
+  },
+  "lbl_position": {
+    "message": "Indicator Position",
+    "description": "Label for a select box, showing options for positioning the indicator either on the left or right side"
+  },
+  "lbl_position_left": {
+    "message": "Left side",
+    "description": "Label for the option of positioning the indicator left to the password field"
+  },
+  "lbl_position_right": {
+    "message": "Right side",
+    "description": "Label for the option of positioning the indicator right to the password field"
+  },
+  "lbl_dynamic": {
+    "message": "Attach indicator to dynamically added fields",
+    "description": "Label for the checkbox toggling the observation of dynamically added password fields for attaching an indicator to them"
+  },
+  "lbl_dragging": {
+    "message": "Enable dragging of indicator",
+    "description": "Label for the checkbox toggling the possibility to drag the indicator with the mouse"
+  },
+  "lbl_tab_basic": {
+    "message": "Basic Settings",
+    "description": "Label for the tab containing the basic settings"
+  },
+  "lbl_tab_advanced": {
+    "message": "Advanced Settings",
+    "description": "Label for the tab containing the advanced settings"
+  },
+  "lbl_enable_url_override": {
+    "message": "Override password length for the listed URLs?",
+    "description": "Label for the checkbox toggling the overriding of password lengths for certain URLs"
+  },
+  "btn_override_delete": {
+    "message": "Delete",
+    "description": "Label for the button in table row for a certain URL to password length mapping that allows deleting this row"
+  },
+  "btn_override_add": {
+    "message": "Add URL Mapping",
+    "description": "Label for the button in table for URL mappings to add another row"
+  },
+  "tbl_col_url": {
+    "message": "URL",
+    "description": "Label for the URL column in table for URL mappings"
+  },
+  "tbl_col_regexp": {
+    "message": "Regular Expression",
+    "description": "Label for the Regular Expression link in the URL column in table for URL mappings"
+  },
+  "tbl_col_length": {
+    "message": "Password Length",
+    "description": "Label for the Password Length column in table for URL mappings"
+  },
+  "btn_save": {
+    "message": "Save Options",
+    "description": "Label for the button that causes the options to be saved"
+  },
+  "btn_reset": {
+    "message": "Reset Options",
+    "description": "Label for the button that causes the options to be reset and to clear the storage"
+  }
 }

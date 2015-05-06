@@ -81,18 +81,30 @@ PasswordLengthIndicator.prototype.setIconPosition = function ($indicator, $field
 };
 
 PasswordLengthIndicator.prototype.getMaxLength = function ($field) {
-	if (this.url && this.options.overwrittenUrlMappings) {
+	if (this.options.allowUrlOverride && this.url && this.options.overwrittenUrlMappings) {
 		var mappings = this.options.overwrittenUrlMappings;
-		for (var property in mappings) {
-			if (mappings.hasOwnProperty(property)) {
-				var found = new RegExp(property, "gi").test(this.url);
-				if (found) {
-					return mappings[property];
+		for (var i=0; i< mappings.length; i++) {
+			var mapping = mappings[i];
+			if (mapping && mapping[OverrideUrlMapping.url] && mapping[OverrideUrlMapping.passwordLength]) {
+				var length = mapping[OverrideUrlMapping.passwordLength];
+				var url = mapping[OverrideUrlMapping.url];
+				var isRegExp = mapping[OverrideUrlMapping.isRegularExpression];
+				if(isRegExp) {
+					try {
+						if (new RegExp(url, "i").test(this.url)) {
+							return length;
+						}
+					} catch (e) {
+						console.error(e);
+					}
+				} else {
+					if(this.url.toLowerCase().indexOf(url)) {
+						return length;
+					}
 				}
 			}
 		}
 	}
-
 	return $field.attr('maxLength');
 };
 

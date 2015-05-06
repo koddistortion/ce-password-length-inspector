@@ -1,76 +1,139 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title id="title"></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <script src="libs/jquery.js"></script>
-        <script src="libs/bootstrap-3.2.0.min.js"></script>
-        <script src="options.js"></script>
-        <script src="initOptions.js"></script>
-    </head>
-    <body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1><img src="img/48-ext-icon.png" alt="" /> <span id="headline"></span></h1>
-                </div>
-            </div>
-            <form class="form-horizontal" role="form">
-                <hr />
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="placement" class="col-sm-3 control-label" id="lbl_placement"></label>
-                            <div class="col-sm-4">
-                                <select name="placement" id="placement" class="form-control">
-                                    <option value="inside" id="lbl_placement_inside"></option>
-                                    <option value="outside" id="lbl_placement_outside"></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="position" class="col-sm-3 control-label" id="lbl_position"></label>
-                            <div class="col-sm-4">
-                                 <select name="placement" id="position" class="form-control">
-                                    <option value="left" id="lbl_position_left"></option>
-                                    <option value="right" id="lbl_position_right"></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" id="dynamic"> <span id="lbl_dynamic"></span>
-                                    </label>
+<head>
+    <title data-translate="title">Password Length Inspector</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="libs/jquery.js"></script>
+    <script src="libs/bootstrap-3.3.4.min.js"></script>
+    <script src="options.js"></script>
+    <script src="initOptions.js"></script>
+</head>
+<body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1><img src="img/48-ext-icon.png" alt=""/> <span data-translate="title">Password Length Inspector Options</span>
+            </h1>
+        </div>
+    </div>
+    <form class="form-horizontal" role="form">
+        <hr/>
+        <div class="row">
+            <div class="col-md-12">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#basic" aria-controls="basic" role="tab"
+                               data-toggle="tab" data-translate="lbl_tab_basic">!Basic</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#advanced" aria-controls="advanced" role="tab"
+                               data-toggle="tab" data-translate="lbl_tab_advanced">!Advanced</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="basic" style="padding: 10px;">
+                            <div class="form-group">
+                                <label for="placement" class="col-sm-3 control-label" data-translate="lbl_placement">!Indicator
+                                    Placement</label>
+
+                                <div class="col-sm-4">
+                                    <select name="placement" id="placement" class="form-control">
+                                        <option value="inside" data-translate="lbl_placement_inside">!Inside of the password field
+                                        </option>
+                                        <option value="outside" data-translate="lbl_placement_outside">!Outside of the password
+                                            field
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" id="dragging"> <span id="lbl_dragging"></span>
-                                    </label>
+                            <div class="form-group">
+                                <label for="position" class="col-sm-3 control-label" data-translate="lbl_position">!Indicator
+                                    Position</label>
+
+                                <div class="col-sm-4">
+                                    <select name="placement" id="position" class="form-control">
+                                        <option value="left" data-translate="lbl_position_left">!Left side</option>
+                                        <option value="right" data-translate="lbl_position_right">!Right side</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="dynamic"> <span data-translate="lbl_dynamic">!Attach indicator to dynamically added fields</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="dragging">
+                                            <span data-translate="lbl_dragging">!Enable dragging of indicator</span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="url_length_mapping" class="col-sm-3 control-label" id="lbl_url_length_mapping"></label>
-                            <div class="col-sm-9">
-                                <textarea rows="10" cols="40" style="width: 100%;" id="url_length_mapping"></textarea>
+                        <div role="tabpanel" class="tab-pane face" id="advanced" style="padding: 10px;">
+                            <div class="form-group">
+                                <div class="col-sm-offset-1 col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="checkOverwrittenUrls">
+                                            <span data-translate="lbl_enable_url_override">!Override password length for the listed URLs?</span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <button type="button" id="save" class="btn btn-success">Save</button>
-                                <button type="button" id="reset" class="btn btn-danger">Reset</button>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <table class="table table-condensed table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 65%">
+                                                <span data-translate="tbl_col_url">!URL</span>
+                                            </th>
+                                            <th style="width: 15%">
+                                                <span data-translate="tbl_col_regexp">!Regular&shy;Expression</span>
+                                                <sup><a href="http://www.w3schools.com/jsref/jsref_obj_regexp.asp">1</a></sup>
+                                                <sup><a href="https://regex101.com/#javascript">2</a></sup>
+                                            </th>
+                                            <th style="width: 15%;">
+                                                <span data-translate="tbl_col_length">!Password Length</span>
+                                            </th>
+                                            <th style="width: 5%"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tbl_override_rows"></tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="4">
+                                                <a href="#" class="btn btn-primary pull-right"
+                                                   data-translate="btn_override_add">!Add</a>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="button" data-translate="btn_save" id="save" class="btn btn-success">!Save Options</button>
+                            <button type="button" data-translate="btn_reset" id="reset" class="btn btn-danger">!Reset Options</button>
+                        </div>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </body>
+    </form>
+</div>
+</body>
 </html>

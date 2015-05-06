@@ -1,41 +1,62 @@
 {
-    "extension_Name": {
-        "message": "Passwortl\u00e4ngen Indikator"
-    },
-    "title": {
-        "message": "Passwortl\u00e4ngen Indikator Optionen"
-    },
-    "lbl_placement": {
-        "message": "Indikator Platzierung"
-    },
-    "lbl_placement_inside": {
-        "message": "Innerhalb des Passwordfelds"
-    },
-    "lbl_placement_outside": {
-        "message": "Au\u00dferhalb des Passwordfelds"
-    },
-    "lbl_position": {
-        "message": "Indikator Position"
-    },
-    "lbl_position_left": {
-        "message": "Linke Seite"
-    },
-    "lbl_position_right": {
-        "message": "Rechte Seite"
-    },
-    "lbl_dynamic": {
-        "message": "Indikator zu dynamisch erstellten Feldern hinzuf\u00fcgen"
-    },
-    "lbl_dragging": {
-        "message": "Verschieben des Indikators erlauben"
-    },
-    "lbl_url_length_mapping": {
-        "message": "Passwortlänge für URL überschreiben"
-    },
-    "save": {
-        "message": "Optionen Speichern"
-    },
-    "reset": {
-        "message": "Optionen Zur\u00fccksetzen"
-    }
+  "extension_Name": {
+    "message": "Passwortl\u00e4ngen Indikator"
+  },
+  "title": {
+    "message": "Passwortl\u00e4ngen Indikator Optionen"
+  },
+  "lbl_placement": {
+    "message": "Indikator Platzierung"
+  },
+  "lbl_placement_inside": {
+    "message": "Innerhalb des Passwordfelds"
+  },
+  "lbl_placement_outside": {
+    "message": "Au\u00dferhalb des Passwordfelds"
+  },
+  "lbl_position": {
+    "message": "Indikator Position"
+  },
+  "lbl_position_left": {
+    "message": "Linke Seite"
+  },
+  "lbl_position_right": {
+    "message": "Rechte Seite"
+  },
+  "lbl_dynamic": {
+    "message": "Indikator zu dynamisch erstellten Feldern hinzuf\u00fcgen"
+  },
+  "lbl_dragging": {
+    "message": "Verschieben des Indikators erlauben"
+  },
+  "lbl_tab_basic": {
+    "message": "Einstellungen"
+  },
+  "lbl_tab_advanced": {
+    "message": "Erweiterte Einstellungen"
+  },
+  "btn_override_add": {
+    "message": "Zeile hinzufügen"
+  },
+  "lbl_enable_url_override": {
+    "message": "Passwortlängen gemäß der unteren URLs festlegen?"
+  },
+  "btn_override_delete": {
+    "message": "Löschen"
+  },
+  "tbl_col_url": {
+    "message": "URL"
+  },
+  "tbl_col_regexp": {
+    "message": "Regulärer Ausdruck"
+  },
+  "tbl_col_length": {
+    "message": "Passwortlänge"
+  },
+  "btn_save": {
+    "message": "Optionen Speichern"
+  },
+  "btn_reset": {
+    "message": "Optionen Zur\u00fccksetzen"
+  }
 }
