@@ -80,8 +80,20 @@ PasswordLengthIndicator.prototype.setIconPosition = function ($indicator, $field
 	$indicator.css("left", $newLeft);
 };
 
-PasswordLengthIndicator.prototype.getOverwrittenLength = function($field) {
-	console.log(this.url);
+PasswordLengthIndicator.prototype.getMaxLength = function ($field) {
+	if (this.url && this.options.overwrittenUrlMappings) {
+		var mappings = this.options.overwrittenUrlMappings;
+		for (var property in mappings) {
+			if (mappings.hasOwnProperty(property)) {
+				var found = new RegExp(property, "gi").test(this.url);
+				if (found) {
+					return mappings[property];
+				}
+			}
+		}
+	}
+
+	return $field.attr('maxLength');
 };
 
 PasswordLengthIndicator.prototype.attachIcon = function ($field) {
@@ -89,8 +101,7 @@ PasswordLengthIndicator.prototype.attachIcon = function ($field) {
 		return;
 	}
 	$field.data(Selectors.hasIndicator, true);
-	var userDefinedMaxLength = this.getOverwrittenLength($field);
-	var $maxLength = userDefinedMaxLength ? userDefinedMaxLength : $field.attr("maxLength");
+	var $maxLength = this.getMaxLength($field);
 	var $text = $maxLength ? $maxLength : "&infin;";
 	var $className = $maxLength ? "" : "large-font";
 	var $zIndex = this.getZLevel($field);
