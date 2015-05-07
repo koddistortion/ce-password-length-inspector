@@ -8,8 +8,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 	<script src="../resources/libs/jquery.js"></script>
 	<script src="../resources/libs/bootstrap-3.3.4.min.js"></script>
+	<script src="../resources/libs/guid.js"></script>
 	<script src="../js/options.js"></script>
-	<script src="../js/initOptions.js"></script>
 </head>
 <body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
 <div class="container-fluid">
@@ -24,15 +24,18 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div role="tabpanel">
-					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation" class="active">
-							<a href="#basic" aria-controls="basic" role="tab"
+							<a href="#basic" id="tab_toggle_basic" aria-controls="basic" role="tab"
 							   data-toggle="tab" data-translate="lbl_tab_basic">!Basic</a>
 						</li>
 						<li role="presentation">
-							<a href="#advanced" aria-controls="advanced" role="tab"
+							<a href="#advanced" id="tab_toggle_advanced" aria-controls="advanced" role="tab"
 							   data-toggle="tab" data-translate="lbl_tab_advanced">!Advanced</a>
+						</li>
+						<li role="presentation">
+							<a href="#io" id="tab_toggle_io" aria-controls="export_import" role="tab"
+							   data-toggle="tab" data-translate="lbl_tab_io">!Export / Import</a>
 						</li>
 					</ul>
 					<div class="tab-content">
@@ -80,8 +83,8 @@
 								</div>
 							</div>
 						</div>
-						<div role="tabpanel" class="tab-pane face" id="advanced" style="padding: 10px;">
-							<div class="form-group">
+						<div role="tabpanel" class="tab-pane fade" id="advanced" style="padding: 10px;">
+							<div class="row">
 								<div class="col-sm-offset-1 col-sm-10">
 									<div class="checkbox">
 										<label>
@@ -91,7 +94,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="row">
 								<div class="col-sm-12">
 									<table class="table table-condensed table-striped table-hover">
 										<thead>
@@ -123,11 +126,40 @@
 								</div>
 							</div>
 						</div>
+						<div role="tabpanel" class="tab-pane fade" id="io" style="padding: 10px;">
+							<div class="well well-sm" data-translate="export_import_notice">!Notice</div>
+							<div class="row">
+								<div class="col-md-12"><label for="txt_io" data-translate="lbl_txt_io"></label></div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+								<textarea id="txt_io" class="form-control" rows="15" style="font-family: monospace"
+										  spellcheck="false"></textarea>
+								</div>
+							</div>
+							<div class="row" style="margin-top: 10px;">
+								<div class="col-md-12 clearfix">
+									<button type="button" data-translate="btn_export" id="btn_export" class="btn btn-primary">!Export
+										Settings
+									</button>
+									<button type="button" data-translate="btn_import" id="btn_import" class="btn btn-primary">!Import
+										Settings
+									</button>
+									<span class="label pull-right" id="import_message" style="font-size: 100%"></span>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-3 col-sm-9">
-							<button type="button" data-translate="btn_save" id="save" class="btn btn-success">!Save Options</button>
-							<button type="button" data-translate="btn_reset" id="reset" class="btn btn-danger">!Reset Options</button>
+					<div id="storage_controls" class="row">
+						<div class="col-xs-12">
+							<hr/>
+							<div class="clearfix">
+								<button type="button" data-translate="btn_save" id="btn_save" class="btn btn-success">!Save Settings
+								</button>
+								<button type="button" data-translate="btn_reset" id="btn_reset" class="btn btn-danger">!Reset Settings
+								</button>
+								<span class="label label-success pull-right" id="save_message" style="font-size: 100%"></span>
+							</div>
 						</div>
 					</div>
 				</div>

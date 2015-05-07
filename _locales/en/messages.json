@@ -47,6 +47,13 @@
     "message": "Advanced Settings",
     "description": "Label for the tab containing the advanced settings"
   },
+  "lbl_tab_io": {
+    "message": "Export / Import"
+  },
+  "lbl_txt_io": {
+    "message": "Serialized Settings",
+    "description": "Label for the text area containing serialized settings to be used for export / import"
+  },
   "lbl_enable_url_override": {
     "message": "Override password length for the listed URLs?",
     "description": "Label for the checkbox toggling the overriding of password lengths for certain URLs"
@@ -72,11 +79,35 @@
     "description": "Label for the Password Length column in table for URL mappings"
   },
   "btn_save": {
-    "message": "Save Options",
-    "description": "Label for the button that causes the options to be saved"
+    "message": "Save Settings",
+    "description": "Label for the button that causes the settings to be saved"
+  },
+  "btn_export": {
+    "message": "Export Settings",
+    "description": "Label for the button that causes the settings to be exported"
+  },
+  "btn_import": {
+    "message": "Import Settings",
+    "description": "Label for the button that causes the settings to be imported"
   },
   "btn_reset": {
-    "message": "Reset Options",
-    "description": "Label for the button that causes the options to be reset and to clear the storage"
+    "message": "Reset Settings",
+    "description": "Label for the button that causes the settings to be reset and to clear the storage"
+  },
+  "confirm_reset": {
+    "message": "Are you sure you want to reset all the settings to default? This cannot be undone!",
+    "description": "Confirmation message that is shown before the settings are to be reset and the storage is to be cleared"
+  },
+  "export_import_notice": {
+    "message": "As Chrome Extensions can not read nor write files from or to the local file system, you have to copy the settings from this text are to or from a local text file in case you want to export or import any settings.",
+    "description": "Notice that Chrome Extensions cannot read / write files from / to the local file system, therefore the user has to copy the settings manually from / to a file"
+  },
+  "imported_but_unsaved": {
+    "message": "The settings were imported successfully, they are not saved yet however.",
+    "description": "Information message that settings have been imported successfully, but are not saved yet"
+  },
+  "saved_successfully": {
+    "message": "The settings were saved and synced successfully.",
+    "description": "Information message that settings have been saved successfully"
   }
 }

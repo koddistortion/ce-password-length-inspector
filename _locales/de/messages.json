@@ -35,6 +35,12 @@
   "lbl_tab_advanced": {
     "message": "Erweiterte Einstellungen"
   },
+  "lbl_tab_io": {
+    "message": "Exportieren / Importieren"
+  },
+  "lbl_txt_io": {
+    "message": "Serialisierte Einstellungen"
+  },
   "btn_override_add": {
     "message": "Zeile hinzufügen"
   },
@@ -54,9 +60,27 @@
     "message": "Passwortlänge"
   },
   "btn_save": {
-    "message": "Optionen Speichern"
+    "message": "Einstellungen Speichern"
+  },
+  "btn_export": {
+    "message": "Einstellungen Exportieren"
+  },
+  "btn_import": {
+    "message": "Einstellungen Importieren"
   },
   "btn_reset": {
-    "message": "Optionen Zur\u00fccksetzen"
+    "message": "Einstellungen Zur\u00fccksetzen"
+  },
+  "confirm_reset": {
+    "message": "Sind Sie sicher, dass Sie die Einstellungen zurücksetzen wollen? Dies ist nicht rückgängig zu machen!"
+  },
+  "export_import_notice": {
+    "message": "Da Chrome Erweiterungen keinen Zugriff auf das lokale Dateisystem haben, müssen Sie die Einstellungen manuell aus dem Textfeld kopieren bzw. in selbiges einfügen"
+  },
+  "imported_but_unsaved": {
+    "message": "Die Einstellungen wurden erfolgreich importiert, allerdings noch nicht gespeichert."
+  },
+  "saved_successfully": {
+    "message": "Die Einstellungen wurden erfolgreich gespeichert und synchronisiert."
   }
 }
