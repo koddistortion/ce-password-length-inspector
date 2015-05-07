@@ -2,7 +2,8 @@ $(document).ready(function () {
 	translateOptionsPage();
 	getOptions();
 	$('#save').click(function () {
-		chrome.storage.sync.set(serializeFormForStorage(), function () { });
+		chrome.storage.sync.set(serializeFormForStorage(), function () {
+		});
 	});
 	$('#reset').click(function () {
 		chrome.storage.sync.clear();
@@ -14,11 +15,11 @@ $(document).ready(function () {
 });
 
 var translateOptionsPage = function () {
-	$('[data-translate]').each(function() {
+	$('[data-translate]').each(function () {
 		var $element = jQuery(this);
 		var translationId = $element.data('translate');
 		var translatedText = chrome.i18n.getMessage(translationId);
-		if(translatedText) {
+		if (translatedText) {
 			$element.html(translatedText);
 		} else {
 			$element.text('!!!' + $element.text());

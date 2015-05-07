@@ -36,7 +36,7 @@ PasswordLengthIndicator.prototype.loadOptions = function () {
 			self.options = new Options();
 		}
 
-		chrome.runtime.sendMessage({getCurrentlyActiveTab: true}, function(response) {
+		chrome.runtime.sendMessage({getCurrentlyActiveTab: true}, function (response) {
 			self.url = response.tab ? response.tab.url : undefined;
 			self.preparePasswordFields();
 			self.startBindingInterval();
@@ -83,13 +83,13 @@ PasswordLengthIndicator.prototype.setIconPosition = function ($indicator, $field
 PasswordLengthIndicator.prototype.getMaxLength = function ($field) {
 	if (this.options.allowUrlOverride && this.url && this.options.overwrittenUrlMappings) {
 		var mappings = this.options.overwrittenUrlMappings;
-		for (var i=0; i< mappings.length; i++) {
+		for (var i = 0; i < mappings.length; i++) {
 			var mapping = mappings[i];
 			if (mapping && mapping[OverrideUrlMapping.url] && mapping[OverrideUrlMapping.passwordLength]) {
 				var length = mapping[OverrideUrlMapping.passwordLength];
 				var url = mapping[OverrideUrlMapping.url];
 				var isRegExp = mapping[OverrideUrlMapping.isRegularExpression];
-				if(isRegExp) {
+				if (isRegExp) {
 					try {
 						if (new RegExp(url, "i").test(this.url)) {
 							return length;
@@ -98,7 +98,7 @@ PasswordLengthIndicator.prototype.getMaxLength = function ($field) {
 						console.error(e);
 					}
 				} else {
-					if(this.url.toLowerCase().indexOf(url)) {
+					if (this.url.toLowerCase().indexOf(url)) {
 						return length;
 					}
 				}
@@ -143,7 +143,7 @@ PasswordLengthIndicator.prototype.getZLevel = function ($zIndexField) {
 	var z;
 	var $zIndex = 0;
 	var $parents = $zIndexField.parentsUntil('body');
-	$parents.each(function() {
+	$parents.each(function () {
 		z = $zIndexField.css("z-index");
 		if (!isNaN(z) && parseInt(z) > $zIndex) {
 			$zIndex = parseInt(z);

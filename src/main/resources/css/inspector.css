@@ -1,0 +1,23 @@
+.pw-inspector-length {
+	background-color: white;
+	border: 1px solid #aaa;
+	position: absolute;
+	font-size: 11px;
+	color: #5a5a5a;
+	vertical-align: middle;
+	min-width: 18px;
+	min-height: 18px;
+	text-align: center;
+	line-height: 18px;
+	font-weight: bold;
+	font-family: 'Open Sans', 'Roboto', 'Droid Sans', 'Calibri', 'Verdana', 'Arial', sans-serif;
+	margin-left: 0;
+	cursor: move;
+	padding: 0 2px;
+	letter-spacing: 1px;
+	opacity: 0.8;
+}
+
+.pw-inspector-length.large-font {
+	font-size: 15pt;
+}

@@ -7,38 +7,38 @@
     "author": "koddistortion",
     "default_locale": "en",
     "permissions": [ "tabs", "storage" ],
-    "options_page": "options.html",
+  "options_page": "src/main/web/options.html",
     "web_accessible_resources": [
         "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css",
         "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css",
         "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
     ],
     "icons": {
-        "512": "img/512-ext-icon.png",
-        "256": "img/256-ext-icon.png",
-        "128": "img/128-ext-icon.png",
-        "64": "img/64-ext-icon.png",
-        "48": "img/48-ext-icon.png",
-        "32": "img/32-ext-icon.png",
-        "16": "img/16-ext-icon.png"
+      "512": "src/main/resources/img/512-ext-icon.png",
+      "256": "src/main/resources/img/256-ext-icon.png",
+      "128": "src/main/resources/img/128-ext-icon.png",
+      "64": "src/main/resources/img/64-ext-icon.png",
+      "48": "src/main/resources/img/48-ext-icon.png",
+      "32": "src/main/resources/img/32-ext-icon.png",
+      "16": "src/main/resources/img/16-ext-icon.png"
     },
     "background": {
         "persistent": false,
-        "scripts": ["inspector-backend.js"]
+      "scripts": ["src/main/js/inspector-backend.js"]
     },
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
             "all_frames": true,
             "css": [
-                "css/inspector.css"
+              "src/main/resources/css/inspector.css"
             ],
             "js": [
-                "libs/jquery.js",
-                "libs/jquery-ui.min.js",
-                "libs/arrive-2.0.0.min.js",
-                "options.js",
-                "inspector.js"
+              "src/main/resources/libs/jquery.js",
+              "src/main/resources/libs/jquery-ui.min.js",
+              "src/main/resources/libs/arrive-2.0.0.min.js",
+              "src/main/js/options.js",
+              "src/main/js/inspector.js"
             ]
         }
     ]
