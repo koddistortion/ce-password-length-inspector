@@ -1,54 +1,13 @@
 /*global chrome */
 /*global Guid */
-var Placement = {};
-Object.defineProperty(Placement, "inside", {
-    value: "inside",
-    writable: false
-});
-Object.defineProperty(Placement, "outside", {
-    value: "outside",
-    writable: false
-});
+/*global UrlOverride*/
+/*global Placement*/
+/*global Position*/
+/*global Settings*/
 
-var Position = {};
-Object.defineProperty(Position, "left", {
-    value: "left",
-    writable: false
-});
-Object.defineProperty(Position, "right", {
-    value: "right",
-    writable: false
-});
+var SettingsPage = function() {};
 
-var UrlOverride = {};
-Object.defineProperty(UrlOverride, "url", {
-    value: "url",
-    writable: false
-});
-Object.defineProperty(UrlOverride, "passwordLength", {
-    value: "passwordLength",
-    writable: false
-});
-Object.defineProperty(UrlOverride, "isRegularExpression", {
-    value: "isRegularExpression",
-    writable: false
-});
-Object.defineProperty(UrlOverride, "guid", {
-    value: "guid",
-    writable: false
-});
-
-var Options = function () {
-    "use strict";
-    this.placement = Placement.outside;
-    this.position = Position.right;
-    this.dynamic = true;
-    this.dragging = true;
-    this.urlOverridesEnabled = false;
-    this.urlOverrides = {};
-};
-
-var addOverrideUrlRow = function (mapping) {
+SettingsPage.prototype.addOverrideUrlRow = function (mapping) {
     "use strict";
     var deleteLabel = chrome.i18n.getMessage('btn_override_delete');
     var $newRow = jQuery(
@@ -72,7 +31,7 @@ var addOverrideUrlRow = function (mapping) {
     return $newRow;
 };
 
-var populateOptionsForm = function (options) {
+SettingsPage.prototype.populateOptionsForm = function (options) {
     "use strict";
     var pos = options.position !== undefined ? options.position : Position.right;
     var pla = options.placement !== undefined ? options.placement : Placement.outside;
@@ -90,11 +49,11 @@ var populateOptionsForm = function (options) {
     jQuery('#tbl_override_rows').empty();
     var i;
     for (i = 0; i < map.length; i++) {
-        addOverrideUrlRow(map[i]);
+        this.addOverrideUrlRow(map[i]);
     }
 };
 
-var serializeUrlMappings = function () {
+SettingsPage.prototype.serializeUrlMappings = function () {
     "use strict";
     var $mappings = [];
     jQuery('#tbl_override_rows').find('tr').each(function () {
@@ -114,14 +73,14 @@ var serializeUrlMappings = function () {
     return $mappings;
 };
 
-var resetOptionsForm = function () {
+SettingsPage.prototype.resetOptionsForm = function () {
     "use strict";
     if(confirm(chrome.i18n.getMessage('confirm_reset'))) {
-        populateOptionsForm(new Options());
+        this.populateOptionsForm(new Settings());
     }
 };
 
-var serializeFormForStorage = function () {
+SettingsPage.prototype.serializeFormForStorage = function () {
     "use strict";
     return {
         placement: jQuery('#placement').val(),
@@ -129,18 +88,19 @@ var serializeFormForStorage = function () {
         dynamic: jQuery('#dynamic').is(':checked'),
         dragging: jQuery('#dragging').is(':checked'),
         urlOverridesEnabled: jQuery('#checkOverwrittenUrls').is(':checked'),
-        urlOverrides: serializeUrlMappings()
+        urlOverrides: this.serializeUrlMappings()
     };
 };
 
-var getOptionsFromStorage = function () {
+SettingsPage.prototype.getOptionsFromStorage = function () {
     "use strict";
+    var self = this;
     chrome.storage.sync.get(null, function ($options) {
-        populateOptionsForm($options);
+        self.populateOptionsForm($options);
     });
 };
 
-var translateOptionsPage = function () {
+SettingsPage.prototype.translateOptionsPage = function () {
     "use strict";
     jQuery('[data-translate]').each(function () {
         var $element = jQuery(this);
@@ -154,10 +114,11 @@ var translateOptionsPage = function () {
     });
 };
 
-var initializeEventHandlers = function() {
+SettingsPage.prototype.initializeEventHandlers = function() {
     "use strict";
+    var self = this;
     jQuery('#btn_save').on('click', function () {
-        chrome.storage.sync.set(serializeFormForStorage(), function () {
+        chrome.storage.sync.set(self.serializeFormForStorage(), function () {
             var $saveMessageField = jQuery('#save_message');
             $saveMessageField.slideDown();
             $saveMessageField.text(chrome.i18n.getMessage('saved_successfully'));
@@ -168,14 +129,14 @@ var initializeEventHandlers = function() {
     });
     jQuery('#btn_reset').on('click', function () {
         chrome.storage.sync.clear();
-        resetOptionsForm();
+        self.resetOptionsForm();
     });
     jQuery('#btn_override_add').on('click', function () {
-        addOverrideUrlRow();
+        self.addOverrideUrlRow();
     });
     jQuery('#btn_export').on('click', function () {
         var $ioField = jQuery('#txt_io');
-        $ioField.val(JSON.stringify(serializeFormForStorage(), null, '  '));
+        $ioField.val(JSON.stringify(self.serializeFormForStorage(), null, '  '));
     });
     jQuery('#btn_import').on('click', function () {
         var $ioField = jQuery('#txt_io');
@@ -185,7 +146,7 @@ var initializeEventHandlers = function() {
         var $ioMessageField = jQuery('#import_message');
         $ioMessageField.slideDown();
         try {
-            populateOptionsForm(JSON.parse($ioField.val()));
+            self.populateOptionsForm(JSON.parse($ioField.val()));
             $ioMessageField.removeClass('text-danger').addClass('text-success').text(chrome.i18n.getMessage('imported_but_unsaved'));
         } catch (e) {
             $ioMessageField.removeClass('text-success').addClass('text-danger').text(e);
@@ -210,7 +171,8 @@ var initializeEventHandlers = function() {
 
 jQuery(document).ready(function () {
     "use strict";
-    translateOptionsPage();
-    getOptionsFromStorage();
-    initializeEventHandlers();
+    var settingsPage = new SettingsPage();
+    settingsPage.translateOptionsPage();
+    settingsPage.getOptionsFromStorage();
+    settingsPage.initializeEventHandlers();
 });

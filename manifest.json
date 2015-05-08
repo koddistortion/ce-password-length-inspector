@@ -10,7 +10,7 @@
     "tabs",
     "storage"
   ],
-  "options_page": "src/main/web/options.html",
+  "options_page": "src/main/web/settings.html",
   "web_accessible_resources": [
     "http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900"
   ],
@@ -25,7 +25,10 @@
   },
   "background": {
     "persistent": false,
-    "scripts": ["src/main/js/inspector-backend.js"]
+    "scripts": [
+      "src/main/js/enums.js",
+      "src/main/js/inspector-backend.js"
+    ]
   },
   "content_scripts": [
     {
@@ -38,7 +41,7 @@
         "src/main/resources/libs/jquery.js",
         "src/main/resources/libs/jquery-ui.min.js",
         "src/main/resources/libs/arrive-2.0.0.min.js",
-        "src/main/js/options.js",
+        "src/main/js/enums.js",
         "src/main/js/inspector.js"
       ]
     }

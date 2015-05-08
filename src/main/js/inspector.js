@@ -1,54 +1,34 @@
-/*global Placement */
-/*global Position */
-/*global Options */
-/*global UrlOverride */
 /*global chrome */
-
-var Selectors = {};
-Object.defineProperty(Selectors, "hasIndicator", {
-    value: "pwl-has-password-indicator",
-    writable: false
-});
-Object.defineProperty(Selectors, "referencedFieldId", {
-    value: "pwl-ref-id",
-    writable: false
-});
-Object.defineProperty(Selectors, "passwordFieldId", {
-    value: "pwl-field-id",
-    writable: false
-});
-Object.defineProperty(Selectors, "passwordInputType", {
-    value: "input[type='password']",
-    writable: false
-});
-Object.defineProperty(Selectors, "wasDragged", {
-    value: "pwl-was-dragged",
-    writable: false
-});
+/*global UrlOverride*/
+/*global Placement*/
+/*global Position*/
+/*global Settings*/
+/*global Selectors*/
+/*global Message*/
 
 var PasswordLengthIndicator = function () {
     "use strict";
     this.uniqueNumber = 0;
     this.observedIcons = [];
     this.url = undefined;
-    this.loadOptions();
+    this.loadSettings();
 };
 
 PasswordLengthIndicator.prototype = {
     constructor: PasswordLengthIndicator,
 
-    loadOptions: function () {
+    loadSettings: function () {
         "use strict";
 
         var self = this;
-        chrome.storage.sync.get(this.options, function ($options) {
-            if ($options !== undefined) {
-                self.options = $options;
+        chrome.storage.sync.get(this.options, function ($settings) {
+            if ($settings !== undefined) {
+                self.options = $settings;
             } else {
-                self.options = new Options();
+                self.options = new Settings();
             }
 
-            chrome.runtime.sendMessage({getCurrentlyActiveTab: true}, function (response) {
+            chrome.runtime.sendMessage({type: Message.getCurrentTab}, function (response) {
                 self.url = response.tab ? response.tab.url : undefined;
                 self.preparePasswordFields();
                 self.startBindingInterval();
