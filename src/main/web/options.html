@@ -4,27 +4,22 @@
 	<title data-translate="title">Password Length Inspector</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-	<script src="../resources/libs/jquery.js"></script>
-	<script src="../resources/libs/bootstrap-3.3.4.min.js"></script>
-	<script src="../resources/libs/guid.js"></script>
-	<script src="../js/options.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" href="../resources/css/bootstrap.css">
+	<link rel="stylesheet" href="../resources/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../resources/css/materialadmin.css">
 </head>
 <body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: 50px">
 	<div class="row">
 		<div class="col-md-12">
-			<h1><img src="../resources/img/48-ext-icon.png" alt=""/> <span data-translate="title">Password Length Inspector Options</span>
-			</h1>
-		</div>
-	</div>
-	<form class="form-horizontal" role="form">
-		<hr/>
-		<div class="row">
-			<div class="col-md-12">
-				<div role="tabpanel">
-					<ul class="nav nav-tabs" role="tablist">
+			<div role="tabpanel" class="card">
+				<div class="card-head style-primary">
+					<header><span data-translate="title">Password Length Inspector Settings</span></header>
+					<i class="fa fa-fw fa-2x fa-wrench pull-right" style="position: relative;top: 15px;right: 10px;"></i>
+				</div>
+				<div class="card-body">
+					<ul class="nav nav-tabs tabs-center" role="tablist">
 						<li role="presentation" class="active">
 							<a href="#basic" id="tab_toggle_basic" aria-controls="basic" role="tab"
 							   data-toggle="tab" data-translate="lbl_tab_basic">!Basic</a>
@@ -40,132 +35,146 @@
 					</ul>
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane fade in active" id="basic" style="padding: 10px;">
-							<div class="form-group">
-								<label for="placement" class="col-sm-3 control-label" data-translate="lbl_placement">!Indicator
-									Placement</label>
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<label for="placement" class="col-sm-3 control-label" data-translate="lbl_placement">!Indicator
+										Placement</label>
 
-								<div class="col-sm-4">
-									<select name="placement" id="placement" class="form-control">
-										<option value="inside" data-translate="lbl_placement_inside">!Inside of the password field
-										</option>
-										<option value="outside" data-translate="lbl_placement_outside">!Outside of the password
-											field
-										</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="position" class="col-sm-3 control-label" data-translate="lbl_position">!Indicator
-									Position</label>
-
-								<div class="col-sm-4">
-									<select name="placement" id="position" class="form-control">
-										<option value="left" data-translate="lbl_position_left">!Left side</option>
-										<option value="right" data-translate="lbl_position_right">!Right side</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-9">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" id="dynamic"> <span data-translate="lbl_dynamic">!Attach indicator to dynamically added fields</span>
-										</label>
+									<div class="col-sm-4">
+										<select name="placement" id="placement" class="form-control">
+											<option value="inside" data-translate="lbl_placement_inside">!Inside of the password field
+											</option>
+											<option value="outside" data-translate="lbl_placement_outside">!Outside of the password
+												field
+											</option>
+										</select>
 									</div>
 								</div>
-								<div class="col-sm-offset-3 col-sm-9">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" id="dragging">
-											<span data-translate="lbl_dragging">!Enable dragging of indicator</span>
-										</label>
+								<div class="form-group">
+									<label for="position" class="col-sm-3 control-label" data-translate="lbl_position">!Indicator
+										Position</label>
+
+									<div class="col-sm-4">
+										<select name="placement" id="position" class="form-control">
+											<option value="left" data-translate="lbl_position_left">!Left side</option>
+											<option value="right" data-translate="lbl_position_right">!Right side</option>
+										</select>
 									</div>
 								</div>
-							</div>
+								<div class="form-group">
+									<div class="col-sm-offset-3 col-sm-9">
+										<div class="checkbox checkbox-styled">
+											<label>
+												<input type="checkbox" id="dynamic"> <span data-translate="lbl_dynamic">!Attach indicator to dynamically added fields</span>
+											</label>
+										</div>
+									</div>
+									<div class="col-sm-offset-3 col-sm-9">
+										<div class="checkbox checkbox-styled">
+											<label>
+												<input type="checkbox" id="dragging">
+												<span data-translate="lbl_dragging">!Enable dragging of indicator</span>
+											</label>
+										</div>
+									</div>
+								</div>
+							</form>
 						</div>
 						<div role="tabpanel" class="tab-pane fade" id="advanced" style="padding: 10px;">
-							<div class="row">
-								<div class="col-sm-offset-1 col-sm-10">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" id="checkOverwrittenUrls">
-											<span data-translate="lbl_enable_url_override">!Override password length for the listed URLs?</span>
-										</label>
+							<form class="form-horizontal" role="form">
+								<div class="row">
+									<div class="col-sm-offset-1 col-sm-10">
+										<div class="checkbox checkbox-styled">
+											<label>
+												<input type="checkbox" id="checkOverwrittenUrls">
+												<span data-translate="lbl_enable_url_override">!Override password length for the listed URLs?</span>
+											</label>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12">
-									<table class="table table-condensed table-striped table-hover">
-										<thead>
-										<tr>
-											<th style="width: 65%">
-												<span data-translate="tbl_col_url">!URL</span>
-											</th>
-											<th style="width: 15%">
-												<span data-translate="tbl_col_regexp">!Regular&shy;Expression</span>
-												<sup><a href="http://www.w3schools.com/jsref/jsref_obj_regexp.asp">1</a></sup>
-												<sup><a href="https://regex101.com/#javascript">2</a></sup>
-											</th>
-											<th style="width: 15%;">
-												<span data-translate="tbl_col_length">!Password Length</span>
-											</th>
-											<th style="width: 5%"></th>
-										</tr>
-										</thead>
-										<tbody id="tbl_override_rows"></tbody>
-										<tfoot>
-										<tr>
-											<td colspan="4">
-												<a href="#" class="btn btn-primary pull-right"
-												   data-translate="btn_override_add" id="btn_override_add">!Add</a>
-											</td>
-										</tr>
-										</tfoot>
-									</table>
+								<div class="row">
+									<div class="col-sm-12">
+										<table class="table table-condensed">
+											<thead>
+											<tr>
+												<th style="width: 65%">
+													<span data-translate="tbl_col_url">!URL</span>
+												</th>
+												<th style="width: 15%">
+													<span data-translate="tbl_col_regexp">!Regular&shy;Expression</span>
+													<sup><a href="http://www.w3schools.com/jsref/jsref_obj_regexp.asp">1</a></sup>
+													<sup><a href="https://regex101.com/#javascript">2</a></sup>
+												</th>
+												<th style="width: 15%;">
+													<span data-translate="tbl_col_length">!Password Length</span>
+												</th>
+												<th style="width: 5%"></th>
+											</tr>
+											</thead>
+											<tbody id="tbl_override_rows"></tbody>
+											<tfoot>
+											<tr>
+												<td colspan="4">
+													<a href="#" class="btn btn-primary btn-flat pull-right"
+													   data-translate="btn_override_add" id="btn_override_add">!Add</a>
+												</td>
+											</tr>
+											</tfoot>
+										</table>
+									</div>
 								</div>
-							</div>
+							</form>
 						</div>
 						<div role="tabpanel" class="tab-pane fade" id="io" style="padding: 10px;">
-							<div class="well well-sm" data-translate="export_import_notice">!Notice</div>
-							<div class="row">
-								<div class="col-md-12"><label for="txt_io" data-translate="lbl_txt_io"></label></div>
-							</div>
-							<div class="row">
-								<div class="col-md-12">
-								<textarea id="txt_io" class="form-control" rows="15" style="font-family: monospace"
-										  spellcheck="false"></textarea>
+							<p><strong class="text-warning" data-translate="export_import_notice">!Notice</strong></p>
+
+							<form class="form">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea id="txt_io" class="form-control control-10-rows"
+													  style="font-family: monospace; font-size: 95%"
+													  spellcheck="false"></textarea>
+											<label for="txt_io" data-translate="lbl_txt_io"></label>
+										</div>
+									</div>
 								</div>
-							</div>
-							<div class="row" style="margin-top: 10px;">
-								<div class="col-md-12 clearfix">
-									<button type="button" data-translate="btn_export" id="btn_export" class="btn btn-primary">!Export
-										Settings
-									</button>
-									<button type="button" data-translate="btn_import" id="btn_import" class="btn btn-primary">!Import
-										Settings
-									</button>
-									<span class="label pull-right" id="import_message" style="font-size: 100%"></span>
-								</div>
-							</div>
+							</form>
 						</div>
 					</div>
-					<div id="storage_controls" class="row">
-						<div class="col-xs-12">
-							<hr/>
-							<div class="clearfix">
-								<button type="button" data-translate="btn_save" id="btn_save" class="btn btn-success">!Save Settings
-								</button>
-								<button type="button" data-translate="btn_reset" id="btn_reset" class="btn btn-danger">!Reset Settings
-								</button>
-								<span class="label label-success pull-right" id="save_message" style="font-size: 100%"></span>
-							</div>
+				</div>
+				<div class="card-actionbar">
+					<div class="card-actionbar-row">
+						<div class="clearfix" id="storage_controls">
+							<button type="button" data-translate="btn_save" id="btn_save" class="btn btn-default-dark btn-flat">!Save
+								Settings
+							</button>
+							<button type="button" data-translate="btn_reset" id="btn_reset" class="btn btn-danger btn-flat">!Reset Settings
+							</button>
+							<span class="label label-success pull-right" id="save_message" style="font-size: 100%"></span>
+						</div>
+						<div class="clearfix" id="io_controls" style="display: none;">
+							<button type="button" data-translate="btn_export" id="btn_export" class="btn btn-default-dark btn-flat">!Export
+								Settings
+							</button>
+							<button type="button" data-translate="btn_import" id="btn_import" class="btn btn-default-dark btn-flat">!Import
+								Settings
+							</button>
+							<span class="label pull-right" id="import_message" style="font-size: 100%"></span>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</form>
+	</div>
 </div>
+<script src="../resources/libs/jquery.js"></script>
+<script src="../resources/libs/jquery-migrate-1.2.1.min.js"></script>
+<script src="../resources/libs/jquery.nanoscroller.min.js"></script>
+<script src="../resources/libs/jquery.autosize.min.js"></script>
+<script src="../resources/libs/bootstrap-3.3.4.min.js"></script>
+<script src="../resources/libs/guid.js"></script>
+<script src="../js/options.js"></script>
+<script src="../resources/libs/App.min.js"></script>
 </body>
 </html>

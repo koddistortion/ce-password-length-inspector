@@ -54,9 +54,9 @@ var addOverrideUrlRow = function (mapping) {
     var $newRow = jQuery(
         '<tr>' +
         '<td><input type="text" name="overrideUrls[]" class="url form-control"></td>' +
-        '<td><input type="checkbox" name="overrideRegExp[]" class="regExp"></td>' +
+		'<td class="checkbox checkbox-styled text-center"><label><input type="checkbox" name="overrideRegExp[]" class="regExp"><span></span></label></td>' +
         '<td><input type="number" name="overrideLengths[]" class="length form-control" min="0" value="10"></td>' +
-        '<td><a class="btn btn-danger delete">' + deleteLabel + '</a><input type="hidden" class="guid" value="' + Guid.raw() + '"/></td>' +
+		'<td><a class="btn btn-danger btn-xs btn-flat delete">' + deleteLabel + '</a><input type="hidden" class="guid" value="' + Guid.raw() + '"/></td>' +
         '</tr>'
     );
     if (mapping && mapping[UrlOverride.url] && mapping[UrlOverride.passwordLength]) {
@@ -197,10 +197,13 @@ var initializeEventHandlers = function() {
 
     jQuery('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         var $storageControls = jQuery('#storage_controls');
+		var $ioControls = jQuery('#io_controls');
         if(e.target.id !== 'tab_toggle_io') {
             $storageControls.show();
+			$ioControls.hide();
         } else {
             $storageControls.hide();
+			$ioControls.show();
         }
     });
 };
