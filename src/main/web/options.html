@@ -10,11 +10,11 @@
 	<link rel="stylesheet" href="../resources/css/materialadmin.css">
 </head>
 <body style="max-width: 1000px; margin-left: auto; margin-right: auto;">
-<div class="container-fluid" style="margin-top: 50px">
+<div class="container-fluid" style="padding-top: 50px">
 	<div class="row">
 		<div class="col-md-12">
 			<div role="tabpanel" class="card">
-				<div class="card-head style-primary">
+				<div class="card-head style-primary tabs-left">
 					<header><span data-translate="title">Password Length Inspector Settings</span></header>
 					<i class="fa fa-fw fa-2x fa-wrench pull-right" style="position: relative;top: 15px;right: 10px;"></i>
 				</div>
@@ -53,7 +53,6 @@
 								<div class="form-group">
 									<label for="position" class="col-sm-3 control-label" data-translate="lbl_position">!Indicator
 										Position</label>
-
 									<div class="col-sm-4">
 										<select name="placement" id="position" class="form-control">
 											<option value="left" data-translate="lbl_position_left">!Left side</option>
@@ -127,7 +126,6 @@
 						</div>
 						<div role="tabpanel" class="tab-pane fade" id="io" style="padding: 10px;">
 							<p><strong class="text-warning" data-translate="export_import_notice">!Notice</strong></p>
-
 							<form class="form">
 								<div class="row">
 									<div class="col-md-12">
@@ -146,21 +144,21 @@
 				<div class="card-actionbar">
 					<div class="card-actionbar-row">
 						<div class="clearfix" id="storage_controls">
+							<strong class="text-success pull-left" id="save_message" style="display: none; position: relative; top: 2px">!Saving succeeded</strong>
 							<button type="button" data-translate="btn_save" id="btn_save" class="btn btn-default-dark btn-flat">!Save
 								Settings
 							</button>
 							<button type="button" data-translate="btn_reset" id="btn_reset" class="btn btn-danger btn-flat">!Reset Settings
 							</button>
-							<span class="label label-success pull-right" id="save_message" style="font-size: 100%"></span>
 						</div>
 						<div class="clearfix" id="io_controls" style="display: none;">
+							<strong class="pull-left" id="import_message" style="display: none; position: relative; top: 2px">!Import succeeded</strong>
 							<button type="button" data-translate="btn_export" id="btn_export" class="btn btn-default-dark btn-flat">!Export
 								Settings
 							</button>
 							<button type="button" data-translate="btn_import" id="btn_import" class="btn btn-default-dark btn-flat">!Import
 								Settings
 							</button>
-							<span class="label pull-right" id="import_message" style="font-size: 100%"></span>
 						</div>
 					</div>
 				</div>

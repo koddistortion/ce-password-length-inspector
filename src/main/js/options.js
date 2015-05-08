@@ -53,9 +53,9 @@ var addOverrideUrlRow = function (mapping) {
     var deleteLabel = chrome.i18n.getMessage('btn_override_delete');
     var $newRow = jQuery(
         '<tr>' +
-        '<td><input type="text" name="overrideUrls[]" class="url form-control"></td>' +
+        '<td><input type="text" name="overrideUrls[]" class="url form-control input-sm"></td>' +
 		'<td class="checkbox checkbox-styled text-center"><label><input type="checkbox" name="overrideRegExp[]" class="regExp"><span></span></label></td>' +
-        '<td><input type="number" name="overrideLengths[]" class="length form-control" min="0" value="10"></td>' +
+        '<td><input type="number" name="overrideLengths[]" class="length form-control input-sm" min="0" value="10"></td>' +
 		'<td><a class="btn btn-danger btn-xs btn-flat delete">' + deleteLabel + '</a><input type="hidden" class="guid" value="' + Guid.raw() + '"/></td>' +
         '</tr>'
     );
@@ -159,10 +159,10 @@ var initializeEventHandlers = function() {
     jQuery('#btn_save').on('click', function () {
         chrome.storage.sync.set(serializeFormForStorage(), function () {
             var $saveMessageField = jQuery('#save_message');
-            $saveMessageField.show();
+            $saveMessageField.slideDown();
             $saveMessageField.text(chrome.i18n.getMessage('saved_successfully'));
             setTimeout(function() {
-                $saveMessageField.fadeOut('slow');
+                $saveMessageField.slideUp();
             }, 5000);
         });
     });
@@ -183,15 +183,15 @@ var initializeEventHandlers = function() {
             return;
         }
         var $ioMessageField = jQuery('#import_message');
-        $ioMessageField.show();
+        $ioMessageField.slideDown();
         try {
             populateOptionsForm(JSON.parse($ioField.val()));
-            $ioMessageField.removeClass('label-danger').addClass('label-success').text(chrome.i18n.getMessage('imported_but_unsaved'));
+            $ioMessageField.removeClass('text-danger').addClass('text-success').text(chrome.i18n.getMessage('imported_but_unsaved'));
         } catch (e) {
-            $ioMessageField.removeClass('label-success').addClass('label-danger').text(e);
+            $ioMessageField.removeClass('text-success').addClass('text-danger').text(e);
         }
         setTimeout(function() {
-            $ioMessageField.fadeOut('slow');
+            $ioMessageField.slideUp();
         }, 5000);
     });
 

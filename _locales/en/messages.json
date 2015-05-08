@@ -71,7 +71,7 @@
     "description": "Label for the URL column in table for URL mappings"
   },
   "tbl_col_regexp": {
-    "message": "Regular Expression",
+    "message": "RegExp",
     "description": "Label for the Regular Expression link in the URL column in table for URL mappings"
   },
   "tbl_col_length": {
