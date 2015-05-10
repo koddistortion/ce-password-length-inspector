@@ -23,12 +23,18 @@ form._
 ## Translations ##
 **Password Length Inspector** is multi-language / multi-locale enabled but currently lacks translations of the options messages and labels 
 for several languages.
-[In order to support with the the translation of any language, please go to `koddistortion.oneskyapp.com`]
+[In order to support with the translation of any language, please go to `koddistortion.oneskyapp.com`]
 (https://koddistortion.oneskyapp.com/collaboration/project?id=32887) 
 
 
 Changelog
 ---------
+### v1.4.0 [2015/05/11]
+* **New** - Added option to overwrite displayed password length for URLs (either via simple in-string search or regular expression)
+* **New** - Added option to manipulate passwords max-length field according to overwritten URL settings
+* **Improvement** - All storage relevant stuff is now handled in the backend and the content script only sends and receives messages
+* **Improvement** - Cleaned up HTML code for the settings page and applied material design bootstrap theme 
+ 
 ### v1.3.0 [2014/08/12]
 * **New** - Extension Options page now uses i18n for displaying labels and messages in different locales (currently german and english 
 only)
@@ -50,16 +56,29 @@ only)
 
 Libraries used
 --------------
-* [JQuery v1.10.2][4]
-* [JQuery UI v1.11.0 (core.js, widget.js, mouse.js, draggable.js)][5]
+
+### JavaScript ###
 * [arrive.js v2.0.0][6]
 * [Bootstrap 3.3.4][7]
+* [Guid][9]
+* [JQuery v1.10.2][4]
+* [JQuery Autosize 1.18.17][10]
+* [jQuery Migrate v1.2.1][11]
+* [JQuery UI v1.11.0 (core.js, widget.js, mouse.js, draggable.js)][5]
 
-  [1]: http://keepass.info
-  [2]: https://agilebits.com/onepassword
-  [3]: https://lastpass.com/
-  [4]: http://jquery.org
-  [5]: http://jqueryui.com
-  [6]: https://github.com/uzairfarooq/arrive
-  [7]: https://getbootstrap.com
+### CSS ###
+* [Bootstrap 3.3.4][7]
+* [FontAwesome 4.3.0][8]
+
+  [1]:  http://keepass.info
+  [2]:  https://agilebits.com/onepassword
+  [3]:  https://lastpass.com/
+  [4]:  http://jquery.org
+  [5]:  http://jqueryui.com
+  [6]:  https://github.com/uzairfarooq/arrive
+  [7]:  https://getbootstrap.com
+  [8]:  https://fontawesome.io
+  [9]:  https://github.com/dandean/guid
+  [10:] http://www.jacklmoore.com/autosize
+  [11:] http://jquery.org
 
