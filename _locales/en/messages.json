@@ -55,8 +55,12 @@
     "description": "Label for the text area containing serialized settings to be used for export / import"
   },
   "lbl_enable_url_override": {
-    "message": "Override password length for the listed URLs?",
+    "message": "Enable custom password length indicator for the listed URLs?",
     "description": "Label for the checkbox toggling the overriding of password lengths for certain URLs"
+  },
+  "lbl_enable_url_override_in_dom": {
+    "message": "Adjust max-length property for password fields in HTML DOM accordingly?",
+    "description": "Label for the checkbox toggling the DOM manipulation of password fields max-length property according to URL overrides"
   },
   "btn_override_delete": {
     "message": "Delete",
@@ -99,7 +103,7 @@
     "description": "Confirmation message that is shown before the settings are to be reset and the storage is to be cleared"
   },
   "export_import_notice": {
-    "message": "As Chrome Extensions can not read nor write files from or to the local file system, you have to copy the settings from this text are to or from a local text file in case you want to export or import any settings.",
+    "message": "As Chrome Extensions can not read nor write files from or to the local file system, you have to copy the settings from this text area to or from a local text file in case you want to export or import any settings.",
     "description": "Notice that Chrome Extensions cannot read / write files from / to the local file system, therefore the user has to copy the settings manually from / to a file"
   },
   "imported_but_unsaved": {

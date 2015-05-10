@@ -86,7 +86,17 @@
 										<div class="checkbox checkbox-styled">
 											<label>
 												<input type="checkbox" id="checkOverwrittenUrls">
-												<span data-translate="lbl_enable_url_override">!Override password length for the listed URLs?</span>
+												<span data-translate="lbl_enable_url_override">!Enable custom password length indicator for the listed URLs?</span>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-offset-1 col-sm-10">
+										<div class="checkbox checkbox-styled">
+											<label>
+												<input type="checkbox" id="enableMaxLengthDomOverride" disabled="disabled">
+												<span data-translate="lbl_enable_url_override_in_dom">!Adjust max-length property for password fields in HTML DOM accordingly?</span>
 											</label>
 										</div>
 									</div>
@@ -173,6 +183,7 @@
 <script src="../resources/libs/bootstrap-3.3.4.min.js"></script>
 <script src="../resources/libs/guid.js"></script>
 <script src="../js/enums.js"></script>
+<script src="../js/inspector-backend.js"></script>
 <script src="../js/settings.js"></script>
 <script src="../resources/libs/App.min.js"></script>
 </body>

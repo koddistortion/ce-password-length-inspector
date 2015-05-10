@@ -4,8 +4,10 @@
 /*global Placement*/
 /*global Position*/
 /*global Settings*/
+/*global Message*/
 
-var SettingsPage = function() {};
+var SettingsPage = function () {
+};
 
 SettingsPage.prototype.addOverrideUrlRow = function (mapping) {
     "use strict";
@@ -13,9 +15,9 @@ SettingsPage.prototype.addOverrideUrlRow = function (mapping) {
     var $newRow = jQuery(
         '<tr>' +
         '<td><input type="text" name="overrideUrls[]" class="url form-control input-sm"></td>' +
-		'<td class="checkbox checkbox-styled text-center"><label><input type="checkbox" name="overrideRegExp[]" class="regExp"><span></span></label></td>' +
+        '<td class="checkbox checkbox-styled text-center"><label><input type="checkbox" name="overrideRegExp[]" class="regExp"><span></span></label></td>' +
         '<td><input type="number" name="overrideLengths[]" class="length form-control input-sm" min="0" value="10"></td>' +
-		'<td><a class="btn btn-danger btn-xs btn-flat delete">' + deleteLabel + '</a><input type="hidden" class="guid" value="' + Guid.raw() + '"/></td>' +
+        '<td><a class="btn btn-danger btn-xs btn-flat delete">' + deleteLabel + '</a><input type="hidden" class="guid" value="' + Guid.raw() + '"/></td>' +
         '</tr>'
     );
     if (mapping && mapping[UrlOverride.url] && mapping[UrlOverride.passwordLength]) {
@@ -31,20 +33,22 @@ SettingsPage.prototype.addOverrideUrlRow = function (mapping) {
     return $newRow;
 };
 
-SettingsPage.prototype.populateOptionsForm = function (options) {
+SettingsPage.prototype.populateSettingsForm = function (settings) {
     "use strict";
-    var pos = options.position !== undefined ? options.position : Position.right;
-    var pla = options.placement !== undefined ? options.placement : Placement.outside;
-    var dyn = options.dynamic || options.dynamic === undefined ? 'checked' : '';
-    var drg = options.dragging || options.dragging === undefined ? 'checked' : '';
-    var map = options.urlOverrides || {};
-    var ovr = options.urlOverridesEnabled || options.urlOverridesEnabled === undefined ? 'checked' : '';
+    var pos = settings.position !== undefined ? settings.position : Position.right;
+    var pla = settings.placement !== undefined ? settings.placement : Placement.outside;
+    var dyn = settings.dynamic || (settings.dynamic === undefined ? 'checked' : '');
+    var drg = settings.dragging || (settings.dragging === undefined ? 'checked' : '');
+    var map = settings.urlOverrides || {};
+    var ovr = settings.urlOverridesEnabled === true ? 'checked' : '';
+    var dom = settings.urlOverridesManipulateDOM === true ? 'checked' : '';
 
     jQuery('#position').val(pos);
     jQuery('#placement').val(pla);
     jQuery('#dynamic').prop('checked', dyn);
     jQuery('#dragging').prop('checked', drg);
     jQuery('#checkOverwrittenUrls').prop('checked', ovr);
+    jQuery('#enableMaxLengthDomOverride').prop('checked', dom);
 
     jQuery('#tbl_override_rows').empty();
     var i;
@@ -75,8 +79,9 @@ SettingsPage.prototype.serializeUrlMappings = function () {
 
 SettingsPage.prototype.resetOptionsForm = function () {
     "use strict";
-    if(confirm(chrome.i18n.getMessage('confirm_reset'))) {
-        this.populateOptionsForm(new Settings());
+    if (confirm(chrome.i18n.getMessage('confirm_reset'))) {
+        this.clearSettings();
+        this.populateSettingsForm(new Settings());
     }
 };
 
@@ -87,16 +92,46 @@ SettingsPage.prototype.serializeFormForStorage = function () {
         position: jQuery('#position').val(),
         dynamic: jQuery('#dynamic').is(':checked'),
         dragging: jQuery('#dragging').is(':checked'),
+        urlOverridesManipulateDOM: jQuery('#enableMaxLengthDomOverride').is(':checked'),
         urlOverridesEnabled: jQuery('#checkOverwrittenUrls').is(':checked'),
-        urlOverrides: this.serializeUrlMappings()
+        urlOverrides: this.serializeUrlMappings(),
+        lastUpdate: new Date(),
+        version: chrome.runtime.getManifest().version
     };
 };
 
-SettingsPage.prototype.getOptionsFromStorage = function () {
+SettingsPage.prototype.loadSettings = function () {
     "use strict";
     var self = this;
-    chrome.storage.sync.get(null, function ($options) {
-        self.populateOptionsForm($options);
+
+    chrome.runtime.sendMessage({type: Message.getSettings}, function (response) {
+        var settings = response.settings.latest;
+        if(!settings) {
+            settings = new Settings();
+        }
+        self.populateSettingsForm(settings);
+        self.updateDomOverrideCheckBox();
+    });
+};
+
+SettingsPage.prototype.saveSettings = function(settings) {
+    "use strict";
+    var self = this;
+
+    chrome.runtime.sendMessage({type: Message.setSettings, settings: settings}, function (response) {
+        console.log(response);
+        var $saveMessageField = jQuery('#save_message');
+        $saveMessageField.slideDown();
+        $saveMessageField.text(chrome.i18n.getMessage('saved_successfully'));
+        setTimeout(function () {
+            $saveMessageField.slideUp();
+        }, 5000);
+    });
+};
+
+SettingsPage.prototype.clearSettings = function() {
+    "use strict";
+    chrome.runtime.sendMessage({type: Message.clearSettings}, function (response) {
     });
 };
 
@@ -114,21 +149,24 @@ SettingsPage.prototype.translateOptionsPage = function () {
     });
 };
 
-SettingsPage.prototype.initializeEventHandlers = function() {
+
+SettingsPage.prototype.updateDomOverrideCheckBox = function () {
+    "use strict";
+    var $enableOverrideBox = jQuery('#checkOverwrittenUrls');
+    if ($enableOverrideBox.is(':checked')) {
+        jQuery('#enableMaxLengthDomOverride').removeAttr('disabled');
+    } else {
+        jQuery('#enableMaxLengthDomOverride').attr('disabled', 'disabled');
+    }
+};
+
+SettingsPage.prototype.initializeEventHandlers = function () {
     "use strict";
     var self = this;
     jQuery('#btn_save').on('click', function () {
-        chrome.storage.sync.set(self.serializeFormForStorage(), function () {
-            var $saveMessageField = jQuery('#save_message');
-            $saveMessageField.slideDown();
-            $saveMessageField.text(chrome.i18n.getMessage('saved_successfully'));
-            setTimeout(function() {
-                $saveMessageField.slideUp();
-            }, 5000);
-        });
+        self.saveSettings(self.serializeFormForStorage());
     });
     jQuery('#btn_reset').on('click', function () {
-        chrome.storage.sync.clear();
         self.resetOptionsForm();
     });
     jQuery('#btn_override_add').on('click', function () {
@@ -140,39 +178,45 @@ SettingsPage.prototype.initializeEventHandlers = function() {
     });
     jQuery('#btn_import').on('click', function () {
         var $ioField = jQuery('#txt_io');
-        if($ioField.val().trim() === "") {
+        if ($ioField.val().trim() === "") {
             return;
         }
         var $ioMessageField = jQuery('#import_message');
         $ioMessageField.slideDown();
         try {
-            self.populateOptionsForm(JSON.parse($ioField.val()));
+            self.populateSettingsForm(JSON.parse($ioField.val()));
             $ioMessageField.removeClass('text-danger').addClass('text-success').text(chrome.i18n.getMessage('imported_but_unsaved'));
         } catch (e) {
             $ioMessageField.removeClass('text-success').addClass('text-danger').text(e);
         }
-        setTimeout(function() {
+        setTimeout(function () {
             $ioMessageField.slideUp();
         }, 5000);
     });
 
+    var $enableOverrideBox = jQuery('#checkOverwrittenUrls');
+    $enableOverrideBox.on('change', function () {
+        self.updateDomOverrideCheckBox();
+    });
+
     jQuery('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         var $storageControls = jQuery('#storage_controls');
-		var $ioControls = jQuery('#io_controls');
-        if(e.target.id !== 'tab_toggle_io') {
+        var $ioControls = jQuery('#io_controls');
+        if (e.target.id !== 'tab_toggle_io') {
             $storageControls.show();
-			$ioControls.hide();
+            $ioControls.hide();
         } else {
             $storageControls.hide();
-			$ioControls.show();
+            $ioControls.show();
         }
     });
 };
+
 
 jQuery(document).ready(function () {
     "use strict";
     var settingsPage = new SettingsPage();
     settingsPage.translateOptionsPage();
-    settingsPage.getOptionsFromStorage();
     settingsPage.initializeEventHandlers();
+    settingsPage.loadSettings();
 });

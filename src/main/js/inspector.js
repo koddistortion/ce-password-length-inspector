@@ -21,13 +21,9 @@ PasswordLengthIndicator.prototype = {
         "use strict";
 
         var self = this;
-        chrome.storage.sync.get(this.options, function ($settings) {
-            if ($settings !== undefined) {
-                self.options = $settings;
-            } else {
-                self.options = new Settings();
-            }
 
+        chrome.runtime.sendMessage({type: Message.getSettings}, function (response) {
+            self.options = response.settings.latest;
             chrome.runtime.sendMessage({type: Message.getCurrentTab}, function (response) {
                 self.url = response.tab ? response.tab.url : undefined;
                 self.preparePasswordFields();
@@ -110,6 +106,10 @@ PasswordLengthIndicator.prototype = {
         }
         $field.data(Selectors.hasIndicator, true);
         var $maxLength = this.getMaxLength($field);
+        if (this.options.urlOverridesManipulateDOM && $maxLength) {
+            console.log('setting max-length to ' + $maxLength + ' for field', $field);
+            $field.attr('maxLength', $maxLength);
+        }
         var $text = $maxLength || "&infin;";
         var $className = $maxLength ? "" : "large-font";
         var $zIndex = this.getZLevel($field);

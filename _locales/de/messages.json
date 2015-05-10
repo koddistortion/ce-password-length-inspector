@@ -45,7 +45,10 @@
     "message": "Zeile hinzufügen"
   },
   "lbl_enable_url_override": {
-    "message": "Passwortlängen gemäß der unteren URLs festlegen?"
+    "message": "Passwortlängen im Indikator gemäß der unteren URLs anzeigen?"
+  },
+  "lbl_enable_url_override_in_dom": {
+    "message": "Passwortlängen in Passwortfeldern im HTML DOM entsprechend überschreiben?"
   },
   "btn_override_delete": {
     "message": "Löschen"

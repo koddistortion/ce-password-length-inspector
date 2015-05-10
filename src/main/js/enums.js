@@ -1,3 +1,4 @@
+/*global chrome*/
 var Placement = {};
 Object.defineProperty(Placement, "inside", {
     value: "inside",
@@ -83,6 +84,10 @@ Object.defineProperty(Message, "clearSettings", {
     value: "clearSettings",
     writable: false
 });
+Object.defineProperty(Message, "clearSettingsResult", {
+    value: "clearSettingsResult",
+    writable: false
+});
 
 
 var Settings = function () {
@@ -92,5 +97,8 @@ var Settings = function () {
     this.dynamic = true;
     this.dragging = true;
     this.urlOverridesEnabled = false;
+    this.urlOverridesManipulateDOM = false;
     this.urlOverrides = {};
+    this.lastUpdate = new Date();
+    this.version = chrome.runtime.getManifest().version;
 };
